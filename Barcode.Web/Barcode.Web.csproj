@@ -1,11 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>cb9c44ff-2762-4a7d-acb5-e982037a66b2</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Cec.Barcode\Cec.Barcode.csproj" />
   </ItemGroup>
