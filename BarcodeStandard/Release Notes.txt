@@ -1,5 +1,9 @@
 Release Notes for BarcodeLib.dll
 ================================
+3.1.6.0
+- Align package and assembly versioning with current release tags.
+- Update target frameworks and modernize dependency baselines across solution projects.
+- Refresh test and web project package references for current platform compatibility.
 2.3.0.0
 - Fix EAN13 country code lookup failure
 - Update to System.Drawing.Common 5.0.0
