@@ -2,9 +2,11 @@
 using Cec.Barcode.Extensions;
 using Cec.Barcode.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 
 namespace Barcode.Web.Controllers;
 
@@ -21,7 +23,18 @@ public class HomeController : BaseController
 
     public IActionResult Index()
     {
-        return View();
+        var symbologies = Enum.GetNames(typeof(BarcodeLib.TYPE))
+            .Where(name => name != nameof(BarcodeLib.TYPE.UNSPECIFIED))
+            .OrderBy(name => name)
+            .ToList();
+
+        var model = new LibraryShowcaseVM
+        {
+            SymbologyCount = symbologies.Count,
+            Symbologies = symbologies,
+        };
+
+        return View(model);
     }
 
     public IActionResult Privacy()
@@ -48,6 +61,32 @@ public class HomeController : BaseController
             Image = barCode.BarcodeImage,
             ImageFormat = ImageFormat.Png
         };
+    }
+
+    public ContentResult MySvg()
+    {
+        var barCode = new BarCodeModel();
+        return Content(barCode.BarcodeSvg, "image/svg+xml");
+    }
+
+    public ActionResult MyQr()
+    {
+        // Cec.Barcode.Extensions.TYPE (used by BarCodeModel) predates QR support and hasn't been
+        // extended with a QRCODE value, so this uses BarcodeLib.Barcode directly.
+        var qr = new BarcodeLib.Barcode { EncodedType = BarcodeLib.TYPE.QRCODE };
+        var image = qr.Encode(BarcodeLib.TYPE.QRCODE, "https://github.com/markhazleton/barcodelib", 240, 240);
+        return new ImageResult
+        {
+            Image = image,
+            ImageFormat = ImageFormat.Png
+        };
+    }
+
+    public ContentResult MyQrSvg()
+    {
+        var qr = new BarcodeLib.Barcode { EncodedType = BarcodeLib.TYPE.QRCODE };
+        qr.Encode(BarcodeLib.TYPE.QRCODE, "https://github.com/markhazleton/barcodelib", 240, 240);
+        return Content(qr.GetSvg(), "image/svg+xml");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

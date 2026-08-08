@@ -106,5 +106,33 @@ namespace Cec.Barcode.Models
                 return b.Encode(b.EncodedType, this.BarValue.Trim(), this.ForeColor, this.BackColor, this.Width, this.Height);
             }
         }
+
+        public string BarcodeSvg
+        {
+            get
+            {
+                Barcode b = new Barcode();
+                try
+                {
+                    if (EncodedType != Cec.Barcode.Extensions.TYPE.UNSPECIFIED)
+                    {
+                        b.EncodedType = (TYPE)EncodedType;
+                        b.Alignment = (AlignmentPositions)this.AlignmentPosition;
+                        b.BarWidth = this.BarWidth;
+                        b.AspectRatio = this.AspectRatio;
+                        b.IncludeLabel = this.IncludeLabel;
+                        b.RotateFlipType = this.RotateFlip;
+                        b.AlternateLabel = this.AlternateLabel;
+                        b.LabelPosition = (LabelPositions)this.LabelPosition;
+                    }//if
+                }//try
+                catch
+                {
+                    // do Something!
+                }//catch
+                b.Encode(b.EncodedType, this.BarValue.Trim(), this.ForeColor, this.BackColor, this.Width, this.Height);
+                return b.GetSvg();
+            }
+        }
     }
 }

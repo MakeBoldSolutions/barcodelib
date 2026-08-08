@@ -1,17 +1,132 @@
-﻿@{
+@model Barcode.Web.Models.LibraryShowcaseVM
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Barnhill Barcode Library</h1>
-    <p class="lead">This is an example of how to implement the Barnhill Barcode library in an ASP.NET Core MVC application.</p>
+    <p class="lead">A pure .NET (net10.0) library for generating linear AND 2D (QR Code) barcode images from a string of data &mdash; both raster (PNG/JPEG/GIF/TIFF/BMP) and vector (SVG) output, no external imaging dependencies beyond <code>System.Drawing.Common</code>.</p>
 
     <p>
-        <img src="/Home/MyImage" alt="Sample barcode" />
+        <img src="/Home/MyImage" alt="Sample barcode (raster)" />
     </p>
 
     <p>
         <a class="btn btn-primary" asp-controller="BarCode" asp-action="Index">View BarCode Demo &raquo;</a>
-        <a target="_blank" class="btn btn-outline-secondary" href="https://github.com/markhazleton/barcodelib">Learn more &raquo;</a>
+        <a target="_blank" class="btn btn-outline-secondary" href="https://www.nuget.org/packages/BarcodeLib">NuGet Package &raquo;</a>
+        <a target="_blank" class="btn btn-outline-secondary" href="https://github.com/markhazleton/barcodelib">Source on GitHub &raquo;</a>
     </p>
+</div>
+
+<hr class="my-5" />
+
+<div class="row text-center g-4">
+    <div class="col-md-3">
+        <h2 class="display-6">@Model.SymbologyCount</h2>
+        <p class="text-muted">supported barcode symbologies</p>
+    </div>
+    <div class="col-md-3">
+        <h2 class="display-6">80</h2>
+        <p class="text-muted">unit tests, including QR round-trip decode checks</p>
+    </div>
+    <div class="col-md-3">
+        <h2 class="display-6">GS1</h2>
+        <p class="text-muted">compliant quiet-zone rendering (v3.2.0+)</p>
+    </div>
+    <div class="col-md-3">
+        <h2 class="display-6">SVG</h2>
+        <p class="text-muted">vector output alongside raster (v3.3.0+)</p>
+    </div>
+</div>
+
+<hr class="my-5" />
+
+<div class="row align-items-center g-4">
+    <div class="col-lg-6">
+        <h3>Raster vs. SVG output</h3>
+        <p class="text-muted">
+            <code>Barcode.EncodedImage</code> still returns a raster <code>System.Drawing.Image</code>
+            as always. The new <code>Barcode.GetSvg()</code> renders the exact same encoded data as a
+            self-contained, resolution-independent SVG document instead &mdash; both share the same
+            GS1-aware bar geometry, so they always agree pixel-for-pixel on where the bars land.
+        </p>
+        <div class="row text-center">
+            <div class="col-6">
+                <p class="fw-bold mb-1">PNG (raster)</p>
+                <img src="/Home/MyImage" alt="Sample barcode rendered as PNG" class="img-fluid border" />
+            </div>
+            <div class="col-6">
+                <p class="fw-bold mb-1">SVG (vector)</p>
+                <img src="/Home/MySvg" alt="Sample barcode rendered as SVG" class="img-fluid border" />
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <h3>Now with QR Code (2D)</h3>
+        <p class="text-muted">
+            <code>TYPE.QRCODE</code> generates a real, scannable QR symbol (try it with your phone
+            camera) using a vendored, MIT-licensed Reed-Solomon/masking encoder &mdash; still zero
+            new runtime package dependencies. Both <code>EncodedImage</code> and
+            <code>GetSvg()</code> work for QR the same way they do for linear symbologies.
+        </p>
+        <div class="row text-center">
+            <div class="col-6">
+                <p class="fw-bold mb-1">QR &mdash; PNG</p>
+                <img src="/Home/MyQr" alt="QR code linking to the GitHub repository, rendered as PNG" class="img-fluid border" />
+            </div>
+            <div class="col-6">
+                <p class="fw-bold mb-1">QR &mdash; SVG</p>
+                <img src="/Home/MyQrSvg" alt="QR code linking to the GitHub repository, rendered as SVG" class="img-fluid border" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="my-5" />
+
+<div class="row">
+    <div class="col-12">
+        <h3>What's new</h3>
+        <ul>
+            <li>
+                <strong>3.4.0:</strong> Added <strong>QR Code</strong> support
+                (<code>TYPE.QRCODE</code>) &mdash; both raster and SVG output, backed by a vendored
+                MIT-licensed encoder (ported from Project Nayuki's QR Code generator library), with
+                round-trip decode verification against an independent decoder in the test suite.
+                Access the raw module grid via the new <code>EncodedMatrix</code> property.
+            </li>
+            <li>
+                <strong>3.3.0:</strong> New <code>Barcode.GetSvg()</code> method renders any encoded
+                barcode &mdash; including standardized UPC-A/EAN-13 digit labels, ITF-14's bearer bars,
+                and PostNet's half-height dashes &mdash; as a vector SVG document, with no new package
+                dependency.
+            </li>
+            <li>
+                <strong>3.2.0:</strong> Rendered barcodes now reserve a <strong>GS1-compliant quiet
+                zone</strong> (clear margin, sized in symbol modules per the GS1 General
+                Specifications) by default. Set <code>Barcode.EnforceGS1QuietZone = false</code> to
+                opt back into the legacy (non-compliant) rendering geometry.
+            </li>
+            <li>
+                <strong>3.2.0:</strong> Expanded unit test coverage: MSI (all 4 checksum variants), the
+                Standard/Interleaved 2-of-5 family, Codabar, UPC-E, and the UPC 2/5-digit supplemental
+                add-ons all now have dedicated, hand-verified tests.
+            </li>
+        </ul>
+    </div>
+</div>
+
+<hr class="my-5" />
+
+<div class="row">
+    <div class="col-12">
+        <h3>Supported symbologies</h3>
+        <p class="text-muted">Pulled directly from the library's <code>TYPE</code> enum, so this list is always current with the installed package version.</p>
+        <div class="d-flex flex-wrap gap-1">
+            @foreach (var symbology in Model.Symbologies)
+            {
+                <span class="badge bg-secondary">@symbology</span>
+            }
+        </div>
+    </div>
 </div>

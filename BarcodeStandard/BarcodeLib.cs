@@ -26,7 +26,7 @@ using System.Xml.Serialization;
 namespace BarcodeLib
 {
     #region Enums
-    public enum TYPE : int { UNSPECIFIED, UPCA, UPCE, UPC_SUPPLEMENTAL_2DIGIT, UPC_SUPPLEMENTAL_5DIGIT, EAN13, EAN8, Interleaved2of5, Interleaved2of5_Mod10, Standard2of5, Standard2of5_Mod10, Industrial2of5, Industrial2of5_Mod10, CODE39, CODE39Extended, CODE39_Mod43, Codabar, PostNet, BOOKLAND, ISBN, JAN13, MSI_Mod10, MSI_2Mod10, MSI_Mod11, MSI_Mod11_Mod10, Modified_Plessey, CODE11, USD8, UCC12, UCC13, LOGMARS, CODE128, CODE128A, CODE128B, CODE128C, ITF14, CODE93, TELEPEN, FIM, PHARMACODE };
+    public enum TYPE : int { UNSPECIFIED, UPCA, UPCE, UPC_SUPPLEMENTAL_2DIGIT, UPC_SUPPLEMENTAL_5DIGIT, EAN13, EAN8, Interleaved2of5, Interleaved2of5_Mod10, Standard2of5, Standard2of5_Mod10, Industrial2of5, Industrial2of5_Mod10, CODE39, CODE39Extended, CODE39_Mod43, Codabar, PostNet, BOOKLAND, ISBN, JAN13, MSI_Mod10, MSI_2Mod10, MSI_Mod11, MSI_Mod11_Mod10, Modified_Plessey, CODE11, USD8, UCC12, UCC13, LOGMARS, CODE128, CODE128A, CODE128B, CODE128C, ITF14, CODE93, TELEPEN, FIM, PHARMACODE, QRCODE };
     public enum SaveTypes : int { JPG, BMP, PNG, GIF, TIFF, UNSPECIFIED };
     public enum AlignmentPositions : int { CENTER, LEFT, RIGHT };
     public enum LabelPositions : int { TOPLEFT, TOPCENTER, TOPRIGHT, BOTTOMLEFT, BOTTOMCENTER, BOTTOMRIGHT };
@@ -39,6 +39,8 @@ namespace BarcodeLib
     {
         #region Variables
         private IBarcode ibarcode = new Blank();
+        private IMatrixBarcode imatrixbarcode = null;
+        private bool[,] _Encoded_Matrix = null;
         private string Raw_Data = string.Empty;
         private string Encoded_Value = string.Empty;
         private string _Country_Assigning_Manufacturer_Code = "N/A";
@@ -108,12 +110,27 @@ namespace BarcodeLib
             set { Raw_Data = value; }
         }//RawData
         /// <summary>
-        /// Gets the encoded value.
+        /// Gets the encoded value. Not available for 2D/matrix symbologies (e.g. QR Code) --
+        /// use <see cref="EncodedMatrix"/> for those instead.
         /// </summary>
         public string EncodedValue
         {
-            get { return Encoded_Value; }
+            get
+            {
+                if (IsMatrixSymbology(Encoded_Type))
+                    throw new NotSupportedException("EENCODE-3: EncodedValue is not available for 2D/matrix symbologies. Use EncodedMatrix instead.");
+                return Encoded_Value;
+            }
         }//EncodedValue
+        /// <summary>
+        /// Gets the encoded value as a 2D grid of modules (true = dark/foreground, false =
+        /// light/background). Only populated for 2D/matrix symbologies (e.g. QR Code); null for
+        /// all 1D/linear symbologies, which use <see cref="EncodedValue"/> instead.
+        /// </summary>
+        public bool[,] EncodedMatrix
+        {
+            get { return _Encoded_Matrix; }
+        }//EncodedMatrix
         /// <summary>
         /// Gets the Country that assigned the Manufacturer Code.
         /// </summary>
@@ -278,6 +295,13 @@ namespace BarcodeLib
             set;
         }//Alignment
         /// <summary>
+        /// When true (the default), rendered barcodes reserve a GS1-compliant quiet zone (clear
+        /// margin, sized in symbol modules per the GS1 General Specifications) on each side of
+        /// the bars. Set to false to reproduce the pre-3.2.0 rendering geometry, which did not
+        /// reserve any quiet zone for most symbologies.
+        /// </summary>
+        public bool EnforceGS1QuietZone { get; set; } = true;
+        /// <summary>
         /// Gets a byte array representation of the encoded image. (Used for Crystal Reports)
         /// </summary>
         public byte[] Encoded_Image_Bytes
@@ -399,7 +423,10 @@ namespace BarcodeLib
             DateTime dtStartTime = DateTime.Now;
 
             this.Encoded_Value = GenerateBarcode();
-            this.Raw_Data = ibarcode.RawData;
+            if (!IsMatrixSymbology(Encoded_Type))
+            {
+                this.Raw_Data = ibarcode.RawData;
+            }
 
             _Encoded_Image = (Image)Generate_Image();
 
@@ -435,6 +462,16 @@ namespace BarcodeLib
             this.Encoded_Value = string.Empty;
             this._Country_Assigning_Manufacturer_Code = "N/A";
 
+            if (IsMatrixSymbology(this.Encoded_Type))
+            {
+                imatrixbarcode = new QRCode(Raw_Data);
+                _Encoded_Matrix = imatrixbarcode.Encoded_Matrix;
+                // EncodedValue is not meaningful for 2D symbologies (see the EncodedValue
+                // property, which throws for these types); this internal sentinel just needs to
+                // be non-empty so Generate_Image()'s "must be encoded first" guard passes.
+                this.Encoded_Value = "QRCODE";
+                return this.Encoded_Value;
+            }
 
             switch (this.Encoded_Type)
             {
@@ -549,12 +586,73 @@ namespace BarcodeLib
             return bitmap;
         }
         /// <summary>
+        /// Returns true if the given symbology is a 2D/matrix type (e.g. QR Code), whose encoded
+        /// data is a 2D grid of modules rather than a 1D bar/space sequence.
+        /// </summary>
+        internal static bool IsMatrixSymbology(TYPE type)
+        {
+            return type == TYPE.QRCODE;
+        }
+        /// <summary>
+        /// Calculates the module size and centering offset for rendering a square 2D/matrix
+        /// symbol (e.g. QR Code) within a <paramref name="totalWidthPx"/> x
+        /// <paramref name="totalHeightPx"/> canvas, reserving <paramref name="quietZoneModules"/>
+        /// modules of clear margin on each side. The symbol is centered and rendered as large as
+        /// possible while staying square (matrix symbologies are not stretched to fill a
+        /// non-square canvas).
+        /// </summary>
+        internal (int moduleSizePx, int offsetX, int offsetY, int contentPx) CalculateMatrixGeometry(int totalWidthPx, int totalHeightPx, int moduleCount, int quietZoneModules)
+        {
+            int totalModules = moduleCount + (2 * quietZoneModules);
+            int moduleSizePx = Math.Max(1, Math.Min(totalWidthPx, totalHeightPx) / totalModules);
+            int contentPx = moduleSizePx * totalModules;
+            int offsetX = (totalWidthPx - contentPx) / 2;
+            int offsetY = (totalHeightPx - contentPx) / 2;
+            return (moduleSizePx, offsetX, offsetY, contentPx);
+        }
+        /// <summary>
+        /// Calculates the per-module bar width and quiet-zone/alignment shift for a linear
+        /// symbol drawn across <paramref name="totalWidthPx"/> pixels, reserving a GS1-compliant
+        /// quiet zone (per <see cref="Gs1QuietZone"/>) on each side when
+        /// <see cref="EnforceGS1QuietZone"/> is true. When false, this reproduces the pre-3.2.0
+        /// geometry (no reserved quiet zone; whole remainder goes to alignment shift only).
+        /// </summary>
+        internal (int barWidth, int quietZonePx, int shiftAdjustment) CalculateModuleGeometry(int totalWidthPx, int moduleCount)
+        {
+            int quietZoneModules = EnforceGS1QuietZone ? Gs1QuietZone.GetQuietZoneModules(Encoded_Type) : 0;
+            int barWidth = totalWidthPx / (moduleCount + (2 * quietZoneModules));
+            int quietZonePx = quietZoneModules * barWidth;
+            int usedWidth = (barWidth * moduleCount) + (2 * quietZonePx);
+            int remainder = totalWidthPx - usedWidth;
+
+            int shiftAdjustment;
+            switch (Alignment)
+            {
+                case AlignmentPositions.LEFT:
+                    shiftAdjustment = quietZonePx;
+                    break;
+                case AlignmentPositions.RIGHT:
+                    shiftAdjustment = quietZonePx + remainder;
+                    break;
+                case AlignmentPositions.CENTER:
+                default:
+                    shiftAdjustment = quietZonePx + (remainder / 2);
+                    break;
+            }//switch
+
+            return (barWidth, quietZonePx, shiftAdjustment);
+        }
+        /// <summary>
         /// Gets a bitmap representation of the encoded data.
         /// </summary>
         /// <returns>Bitmap of encoded value.</returns>
         private Bitmap Generate_Image()
         {
             if (Encoded_Value == string.Empty) throw new Exception("EGENERATE_IMAGE-1: Must be encoded first.");
+
+            if (IsMatrixSymbology(this.Encoded_Type))
+                return Generate_Image_Matrix();
+
             Bitmap bitmap = null;
 
             DateTime dtStartTime = DateTime.Now;
@@ -641,23 +739,9 @@ namespace BarcodeLib
                         int ILHeight = Height;
                         int topLabelAdjustment = 0;
 
-                        int shiftAdjustment = 0;
-                        int iBarWidth = Width / Encoded_Value.Length;
-
-                        //set alignment
-                        switch (Alignment)
-                        {
-                            case AlignmentPositions.LEFT:
-                                shiftAdjustment = 0;
-                                break;
-                            case AlignmentPositions.RIGHT:
-                                shiftAdjustment = (Width % Encoded_Value.Length);
-                                break;
-                            case AlignmentPositions.CENTER:
-                            default:
-                                shiftAdjustment = (Width % Encoded_Value.Length) / 2;
-                                break;
-                        }//switch
+                        var upcaGeometry = CalculateModuleGeometry(Width, Encoded_Value.Length);
+                        int shiftAdjustment = upcaGeometry.shiftAdjustment;
+                        int iBarWidth = upcaGeometry.barWidth;
 
                         if (IncludeLabel)
                         {
@@ -675,8 +759,6 @@ namespace BarcodeLib
                                 LabelFont = labFont;
 
                                 ILHeight -= (labFont.Height / 2);
-
-                                iBarWidth = Width / Encoded_Value.Length;
                             }
                             else
                             {
@@ -744,22 +826,8 @@ namespace BarcodeLib
                         int ILHeight = Height;
                         int topLabelAdjustment = 0;
 
-                        int shiftAdjustment = 0;
-
-                        //set alignment
-                        switch (Alignment)
-                        {
-                            case AlignmentPositions.LEFT:
-                                shiftAdjustment = 0;
-                                break;
-                            case AlignmentPositions.RIGHT:
-                                shiftAdjustment = (Width % Encoded_Value.Length);
-                                break;
-                            case AlignmentPositions.CENTER:
-                            default:
-                                shiftAdjustment = (Width % Encoded_Value.Length) / 2;
-                                break;
-                        }//switch
+                        var ean13Geometry = CalculateModuleGeometry(Width, Encoded_Value.Length);
+                        int shiftAdjustment = ean13Geometry.shiftAdjustment;
 
                         if (IncludeLabel)
                         {
@@ -792,7 +860,7 @@ namespace BarcodeLib
                         }
 
                         bitmap = CreateBitmap(Width, Height);
-                        int iBarWidth = Width / Encoded_Value.Length;
+                        int iBarWidth = ean13Geometry.barWidth;
                         int iBarWidthModifier = 1;
                         if (iBarWidth <= 0)
                             throw new Exception("EGENERATE_IMAGE-2: Image size specified not large enough to draw image. (Bar size determined to be less than 1 pixel)");
@@ -859,27 +927,13 @@ namespace BarcodeLib
 
 
                         bitmap = CreateBitmap(Width, Height);
-                        int iBarWidth = Width / Encoded_Value.Length;
-                        int shiftAdjustment = 0;
+                        var defaultGeometry = CalculateModuleGeometry(Width, Encoded_Value.Length);
+                        int iBarWidth = defaultGeometry.barWidth;
+                        int shiftAdjustment = defaultGeometry.shiftAdjustment;
                         int iBarWidthModifier = 1;
 
                         if (this.Encoded_Type == TYPE.PostNet)
                             iBarWidthModifier = 2;
-
-                        //set alignment
-                        switch (Alignment)
-                        {
-                            case AlignmentPositions.LEFT:
-                                shiftAdjustment = 0;
-                                break;
-                            case AlignmentPositions.RIGHT:
-                                shiftAdjustment = (Width % Encoded_Value.Length);
-                                break;
-                            case AlignmentPositions.CENTER:
-                            default:
-                                shiftAdjustment = (Width % Encoded_Value.Length) / 2;
-                                break;
-                        }//switch
 
                         if (iBarWidth <= 0)
                             throw new Exception("EGENERATE_IMAGE-2: Image size specified not large enough to draw image. (Bar size determined to be less than 1 pixel)");
@@ -933,6 +987,59 @@ namespace BarcodeLib
 
             return bitmap;
         }//Generate_Image
+        /// <summary>
+        /// Renders a 2D/matrix symbol (e.g. QR Code) from <see cref="_Encoded_Matrix"/>. QR's own
+        /// minimum quiet zone is 4 modules. Matrix symbols are square, so they're centered and
+        /// rendered as large as possible within the canvas without stretching. Text labels are not
+        /// currently supported for matrix symbologies (<see cref="IncludeLabel"/> is ignored).
+        /// </summary>
+        private Bitmap Generate_Image_Matrix()
+        {
+            if (_Encoded_Matrix == null)
+                throw new Exception("EGENERATE_IMAGE-1: Must be encoded first.");
+
+            DateTime dtStartTime = DateTime.Now;
+
+            const int quietZoneModules = 4;
+            int moduleCount = _Encoded_Matrix.GetLength(0);
+
+            Bitmap bitmap = CreateBitmap(Width, Height);
+            var geometry = CalculateMatrixGeometry(Width, Height, moduleCount, quietZoneModules);
+
+            using (Graphics g = Graphics.FromImage(bitmap))
+            {
+                g.Clear(BackColor);
+                using (SolidBrush brush = new SolidBrush(ForeColor))
+                {
+                    for (int y = 0; y < moduleCount; y++)
+                    {
+                        for (int x = 0; x < moduleCount; x++)
+                        {
+                            if (_Encoded_Matrix[y, x])
+                            {
+                                int px = geometry.offsetX + ((x + quietZoneModules) * geometry.moduleSizePx);
+                                int py = geometry.offsetY + ((y + quietZoneModules) * geometry.moduleSizePx);
+                                g.FillRectangle(brush, px, py, geometry.moduleSizePx, geometry.moduleSizePx);
+                            }
+                        }
+                    }
+                }
+            }
+
+            _Encoded_Image = (Image)bitmap;
+            this.EncodingTime += (DateTime.Now - dtStartTime).TotalMilliseconds;
+            return bitmap;
+        }//Generate_Image_Matrix
+        /// <summary>
+        /// Renders the currently encoded barcode as an SVG document (vector output), as an
+        /// alternative to the raster <see cref="EncodedImage"/>. Must be called after encoding
+        /// (e.g. via <see cref="GenerateBarcode(string)"/> or one of the <c>Encode</c> overloads).
+        /// </summary>
+        /// <returns>A complete, self-contained SVG document as a string.</returns>
+        public string GetSvg()
+        {
+            return SvgRenderer.Render(this);
+        }//GetSvg
         /// <summary>
         /// Gets the bytes that represent the image.
         /// </summary>
