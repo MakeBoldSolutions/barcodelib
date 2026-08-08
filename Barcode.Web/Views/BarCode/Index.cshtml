@@ -1,31 +1,158 @@
-@model Barcode.Web.Models.BarCodeVM
+@model Barcode.Web.Models.BarcodeViewModel
+@using System.Drawing
+@using Microsoft.AspNetCore.Routing
 @{
-    ViewData["Title"] = "BarCode";
+    ViewData["Title"] = "BarCode Playground";
+
+    string ForeHex = "#" + Model.ForeColor.R.ToString("X2") + Model.ForeColor.G.ToString("X2") + Model.ForeColor.B.ToString("X2");
+    string BackHex = "#" + Model.BackColor.R.ToString("X2") + Model.BackColor.G.ToString("X2") + Model.BackColor.B.ToString("X2");
+
+    var previewRoute = new
+    {
+        BarValue = Model.BarValue,
+        AlternateLabel = Model.AlternateLabel,
+        EncodedType = Model.EncodedType,
+        Alignment = Model.Alignment,
+        LabelPosition = Model.LabelPosition,
+        RotateFlip = Model.RotateFlip,
+        Width = Model.Width,
+        Height = Model.Height,
+        BarWidth = Model.BarWidth,
+        AspectRatio = Model.AspectRatio,
+        IncludeLabel = Model.IncludeLabel,
+        EnforceGS1QuietZone = Model.EnforceGS1QuietZone,
+        ForeColor = ForeHex,
+        BackColor = BackHex,
+    };
 }
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-8 mx-auto">
-            <!-- List group-->
-            <ul class="list-group shadow">
-                @foreach (var item in Model.BarCodeList)
+<h2>BarCode Playground</h2>
+<p class="text-muted">Generate any supported symbology directly from <code>BarcodeLib</code>, live in the browser.</p>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
+}
+
+<div class="row">
+    <div class="col-lg-7">
+        <form asp-action="Index" method="get" class="row g-3">
+            <div class="col-md-8">
+                <label asp-for="BarValue" class="form-label"></label>
+                <input asp-for="BarValue" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="EncodedType" class="form-label"></label>
+                <select asp-for="EncodedType" asp-items="Html.GetEnumSelectList<BarcodeLib.TYPE>()" class="form-select"></select>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="AlternateLabel" class="form-label"></label>
+                <input asp-for="AlternateLabel" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Alignment" class="form-label"></label>
+                <select asp-for="Alignment" asp-items="Html.GetEnumSelectList<BarcodeLib.AlignmentPositions>()" class="form-select"></select>
+            </div>
+            <div class="col-md-3">
+                <label asp-for="LabelPosition" class="form-label"></label>
+                <select asp-for="LabelPosition" asp-items="Html.GetEnumSelectList<BarcodeLib.LabelPositions>()" class="form-select"></select>
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="Width" class="form-label"></label>
+                <input asp-for="Width" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Height" class="form-label"></label>
+                <input asp-for="Height" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="BarWidth" class="form-label"></label>
+                <input asp-for="BarWidth" class="form-control" placeholder="auto" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="AspectRatio" class="form-label"></label>
+                <input asp-for="AspectRatio" class="form-control" placeholder="auto" />
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="RotateFlip" class="form-label"></label>
+                <select asp-for="RotateFlip" asp-items="Html.GetEnumSelectList<System.Drawing.RotateFlipType>()" class="form-select"></select>
+            </div>
+            <div class="col-md-3">
+                <label for="ForeColor" class="form-label">Fore Color</label>
+                <input id="ForeColor" name="ForeColor" class="jscolor form-control" value="@ForeHex" />
+            </div>
+            <div class="col-md-3">
+                <label for="BackColor" class="form-label">Back Color</label>
+                <input id="BackColor" name="BackColor" class="jscolor form-control" value="@BackHex" />
+            </div>
+
+            <div class="col-md-3 d-flex flex-column justify-content-end">
+                <div class="form-check">
+                    <input asp-for="IncludeLabel" class="form-check-input" />
+                    <label asp-for="IncludeLabel" class="form-check-label"></label>
+                </div>
+                <div class="form-check">
+                    <input asp-for="EnforceGS1QuietZone" class="form-check-input" />
+                    <label asp-for="EnforceGS1QuietZone" class="form-check-label"></label>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Generate</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-body text-center">
+                @if (Model.IsMatrix)
                 {
-                    <!-- list group item-->
-                    <li class="list-group-item">
-                        <!-- Custom content-->
-                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                            <div class="media-body order-2 order-lg-1">
-                                <h5 class="mt-0 font-weight-bold mb-2">
-                                    <a asp-action="Details" asp-route-id="@item.Id">@item.AlternateLabel</a>
-                                </h5>
-                            </div>
-                            <img src="data:image;base64,@System.Convert.ToBase64String(item.BarcodeByteArray)" class="img-fluid ml-lg-5 order-1 order-lg-2" />
-                        </div>
-                        <!-- End -->
-                    </li>
+                    <img src="@Url.Action("Image", previewRoute)" class="img-fluid border" alt="Generated barcode" />
                 }
-            </ul>
-            <!-- End -->
+                else
+                {
+                    <img src="@Url.Action("Svg", previewRoute)" class="img-fluid border" alt="Generated barcode" />
+                }
+            </div>
+            <div class="card-footer">
+                @if (!string.IsNullOrEmpty(Model.EncodedValueText))
+                {
+                    <p class="mb-1 text-break"><strong>Encoded value:</strong> <code>@Model.EncodedValueText</code></p>
+                }
+                <p class="mb-2 text-muted small">Encoding time: @Math.Round(Model.EncodingTimeMs, 0)ms</p>
+
+                <div class="d-flex flex-wrap gap-2">
+                    <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Download", DownloadRoute(previewRoute, "PNG"))">Download PNG</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Download", DownloadRoute(previewRoute, "JPG"))">Download JPG</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Download", DownloadRoute(previewRoute, "GIF"))">Download GIF</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Download", DownloadRoute(previewRoute, "BMP"))">Download BMP</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Download", DownloadRoute(previewRoute, "TIFF"))">Download TIFF</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Svg", previewRoute)" target="_blank">View SVG</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("ExportJson", previewRoute)">Export JSON</a>
+                </div>
+            </div>
         </div>
+
+        <form asp-action="ImportJson" method="post" enctype="multipart/form-data" class="mt-3 d-flex gap-2 align-items-center">
+            <input type="file" name="jsonFile" accept=".json" class="form-control form-control-sm" />
+            <button type="submit" class="btn btn-sm btn-outline-primary text-nowrap">Import JSON</button>
+        </form>
     </div>
 </div>
+
+@functions {
+    private static RouteValueDictionary DownloadRoute(object route, string format)
+    {
+        var dict = new RouteValueDictionary(route);
+        dict["format"] = format;
+        return dict;
+    }
+}
+
+@section Scripts {
+    <script src="~/lib/jscolor/jscolor.js"></script>
+}

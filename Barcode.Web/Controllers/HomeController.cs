@@ -1,6 +1,5 @@
-﻿using Barcode.Web.Models;
-using Cec.Barcode.Extensions;
-using Cec.Barcode.Models;
+﻿using Barcode.Web.Extensions;
+using Barcode.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
@@ -10,7 +9,7 @@ using System.Linq;
 
 namespace Barcode.Web.Controllers;
 
-public class HomeController : BaseController
+public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IWebHostEnvironment _webHostEnvironment;
@@ -55,24 +54,24 @@ public class HomeController : BaseController
 
     public ActionResult MyImage()
     {
-        var barCode = new BarCodeModel();
+        var barCode = new BarcodeLib.Barcode { EncodedType = BarcodeLib.TYPE.CODE93 };
+        barCode.Encode(BarcodeLib.TYPE.CODE93, "controlorigins.com", 290, 120);
         return new ImageResult
         {
-            Image = barCode.BarcodeImage,
+            Image = barCode.EncodedImage,
             ImageFormat = ImageFormat.Png
         };
     }
 
     public ContentResult MySvg()
     {
-        var barCode = new BarCodeModel();
-        return Content(barCode.BarcodeSvg, "image/svg+xml");
+        var barCode = new BarcodeLib.Barcode { EncodedType = BarcodeLib.TYPE.CODE93 };
+        barCode.Encode(BarcodeLib.TYPE.CODE93, "controlorigins.com", 290, 120);
+        return Content(barCode.GetSvg(), "image/svg+xml");
     }
 
     public ActionResult MyQr()
     {
-        // Cec.Barcode.Extensions.TYPE (used by BarCodeModel) predates QR support and hasn't been
-        // extended with a QRCODE value, so this uses BarcodeLib.Barcode directly.
         var qr = new BarcodeLib.Barcode { EncodedType = BarcodeLib.TYPE.QRCODE };
         var image = qr.Encode(BarcodeLib.TYPE.QRCODE, "https://github.com/markhazleton/barcodelib", 240, 240);
         return new ImageResult

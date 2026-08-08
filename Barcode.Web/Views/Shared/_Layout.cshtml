@@ -41,7 +41,11 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - Barcode.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            @{
+                var buildDate = System.IO.File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            }
+            &copy; 2022-@DateTime.Now.Year - Barcode.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <span class="float-end small">Build: @buildDate.ToString("yyyy-MM-dd")</span>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

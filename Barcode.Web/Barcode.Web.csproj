@@ -8,6 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Cec.Barcode\Cec.Barcode.csproj" />
+    <ProjectReference Include="..\BarcodeStandard\BarcodeStandard.csproj" />
   </ItemGroup>
 </Project>
