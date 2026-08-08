@@ -12,9 +12,9 @@
     </p>
 
     <p>
-        <a class="btn btn-primary" asp-controller="BarCode" asp-action="Index">View BarCode Demo &raquo;</a>
-        <a target="_blank" class="btn btn-outline-secondary" href="https://www.nuget.org/packages/BarcodeLib">NuGet Package &raquo;</a>
-        <a target="_blank" class="btn btn-outline-secondary" href="https://github.com/markhazleton/barcodelib">Source on GitHub &raquo;</a>
+        <a class="mbs-btn mbs-btn--primary mbs-btn--lg" asp-controller="BarCode" asp-action="Index">View BarCode Demo &raquo;</a>
+        <a target="_blank" class="mbs-btn mbs-btn--secondary mbs-btn--lg" href="https://www.nuget.org/packages/BarcodeLib">NuGet Package &raquo;</a>
+        <a target="_blank" class="mbs-btn mbs-btn--ghost mbs-btn--lg" href="https://github.com/markhazleton/barcodelib">Source on GitHub &raquo;</a>
     </p>
 </div>
 
@@ -22,19 +22,19 @@
 
 <div class="row text-center g-4">
     <div class="col-md-3">
-        <h2 class="display-6">@Model.SymbologyCount</h2>
+        <h2 class="display-6" style="color:var(--brand)">@Model.SymbologyCount</h2>
         <p class="text-muted">supported barcode symbologies</p>
     </div>
     <div class="col-md-3">
-        <h2 class="display-6">80</h2>
+        <h2 class="display-6" style="color:var(--brand)">80</h2>
         <p class="text-muted">unit tests, including QR round-trip decode checks</p>
     </div>
     <div class="col-md-3">
-        <h2 class="display-6">GS1</h2>
+        <h2 class="display-6" style="color:var(--brand)">GS1</h2>
         <p class="text-muted">compliant quiet-zone rendering (v3.2.0+)</p>
     </div>
     <div class="col-md-3">
-        <h2 class="display-6">SVG</h2>
+        <h2 class="display-6" style="color:var(--brand)">SVG</h2>
         <p class="text-muted">vector output alongside raster (v3.3.0+)</p>
     </div>
 </div>
@@ -125,7 +125,7 @@
         <div class="d-flex flex-wrap gap-1">
             @foreach (var symbology in Model.Symbologies)
             {
-                <span class="badge bg-secondary">@symbology</span>
+                <span class="mbs-badge">@symbology</span>
             }
         </div>
     </div>

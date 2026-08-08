@@ -1,3 +1,8 @@
+/* ==========================================================================
+   Barcode.Web — Make Bold Solutions design system integration
+   Brand tokens/components load first (brand/styles.css, brand/components.css);
+   this file bridges Bootstrap's compiled classes onto those tokens.
+   ========================================================================== */
 html {
   font-size: 14px;
 }
@@ -15,4 +20,167 @@ html {
 
 body {
   margin-bottom: 60px;
+  background: var(--surface-page);
+  color: var(--text-body);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+code, kbd, samp {
+  font-family: var(--font-mono);
+}
+
+a {
+  color: var(--text-link);
+}
+a:hover {
+  color: var(--brand-strong);
+}
+
+/* ---- Navbar ---- */
+.navbar {
+  background: var(--surface-card) !important;
+  border-bottom: 1px solid var(--border-default) !important;
+  box-shadow: none !important;
+}
+.navbar-brand {
+  font-family: var(--font-display);
+  font-weight: var(--fw-extrabold);
+  color: var(--text-strong) !important;
+  letter-spacing: var(--ls-tight);
+}
+.navbar .nav-link {
+  font-weight: var(--fw-medium);
+  color: var(--text-body) !important;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: var(--brand) !important;
+}
+
+/* ---- Buttons: reskin Bootstrap's compiled classes with brand colors ---- */
+.btn-primary {
+  color: var(--text-on-brand);
+  background-color: var(--brand);
+  border-color: var(--brand);
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-check:focus + .btn-primary {
+  color: var(--text-on-brand);
+  background-color: var(--brand-strong);
+  border-color: var(--brand-strong);
+}
+.btn-primary:active,
+.btn-check:checked + .btn-primary {
+  background-color: var(--rust-700) !important;
+  border-color: var(--rust-700) !important;
+}
+
+.btn-outline-secondary {
+  color: var(--brand-strong);
+  border-color: var(--border-strong);
+}
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus {
+  color: var(--text-on-brand);
+  background-color: var(--brand);
+  border-color: var(--brand);
+}
+
+.btn-outline-primary {
+  color: var(--brand);
+  border-color: var(--brand);
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  color: var(--text-on-brand);
+  background-color: var(--brand);
+  border-color: var(--brand);
+}
+
+.btn {
+  border-radius: var(--radius-md);
+  font-weight: var(--fw-semibold);
+}
+
+/* ---- Forms ---- */
+.form-control,
+.form-select {
+  border-color: var(--border-default);
+  border-radius: var(--radius-md);
+}
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--accent);
+  box-shadow: var(--ring-focus);
+}
+.form-label {
+  font-weight: var(--fw-semibold);
+  color: var(--text-body);
+}
+.form-check-input:checked {
+  background-color: var(--brand);
+  border-color: var(--brand);
+}
+
+/* ---- Cards ---- */
+.card {
+  border-color: var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---- Badges ---- */
+.badge.bg-secondary {
+  background-color: var(--ink-100) !important;
+  color: var(--ink-700) !important;
+  font-weight: var(--fw-semibold);
+}
+
+/* ---- Alerts ---- */
+.alert-danger {
+  background-color: var(--critical-soft);
+  border-color: var(--critical);
+  color: var(--critical);
+}
+
+/* ---- Misc ---- */
+.text-muted {
+  color: var(--text-muted) !important;
+}
+hr {
+  border-top-color: var(--border-default);
+}
+
+.border-top {
+  border-top: 1px solid var(--border-default) !important;
+}
+.border-bottom {
+  border-bottom: 1px solid var(--border-default) !important;
+}
+.border {
+  border-color: var(--border-default) !important;
+}
+
+.box-shadow {
+  box-shadow: var(--shadow-sm);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+  background: var(--surface-card);
+  color: var(--text-muted);
 }

@@ -1,0 +1,57 @@
+/* ==========================================================================
+   Make Bold Solutions — Plain-CSS components (Button, Card, Badge, Eyebrow, Input)
+   Link after styles.css. Class names are BEM-ish: mbs-<component>--<modifier>
+   ========================================================================== */
+
+/* ---- Button ---- */
+.mbs-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-body);font-weight:var(--fw-semibold);font-size:15px;line-height:1;letter-spacing:0.01em;padding:11px 20px;border-radius:var(--radius-md);border:1px solid transparent;cursor:pointer;text-decoration:none;white-space:nowrap;transition:background var(--dur-fast) var(--ease-standard),color var(--dur-fast) var(--ease-standard),border-color var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)}
+.mbs-btn:active{transform:translateY(1px)}
+.mbs-btn:disabled,.mbs-btn[disabled]{opacity:.45;cursor:not-allowed;pointer-events:none}
+.mbs-btn--sm{padding:8px 14px;font-size:14px;gap:6px}
+.mbs-btn--lg{padding:15px 28px;font-size:17px;gap:10px}
+.mbs-btn--full{width:100%}
+
+.mbs-btn--primary{background:var(--brand);color:var(--text-on-brand)}
+.mbs-btn--primary:hover{background:var(--brand-strong)}
+.mbs-btn--accent{background:var(--accent);color:var(--white)}
+.mbs-btn--accent:hover{background:var(--accent-strong)}
+.mbs-btn--secondary{background:transparent;color:var(--brand-strong);border-color:var(--brand)}
+.mbs-btn--secondary:hover{background:var(--brand-soft)}
+.mbs-btn--ghost{background:transparent;color:var(--text-strong)}
+.mbs-btn--ghost:hover{background:var(--ink-100)}
+.mbs-btn--dark{background:var(--surface-dark);color:var(--cream)}
+.mbs-btn--dark:hover{background:var(--ink-800)}
+
+/* ---- Card ---- */
+.mbs-card{background:var(--surface-card);border:1px solid var(--border-default);border-radius:var(--radius-lg);padding:28px;box-shadow:var(--shadow-sm);transition:box-shadow var(--dur-base) var(--ease-standard),transform var(--dur-base) var(--ease-standard),border-color var(--dur-base) var(--ease-standard)}
+.mbs-card--sm{padding:16px}
+.mbs-card--md{padding:20px}
+.mbs-card--xl{padding:36px}
+.mbs-card--none{padding:0}
+.mbs-card--accent{border-top:3px solid var(--brand)}
+.mbs-card--interactive{cursor:pointer}
+.mbs-card--interactive:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+
+/* ---- Badge ---- */
+.mbs-badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-body);font-weight:var(--fw-semibold);font-size:12px;letter-spacing:0.02em;line-height:1;padding:5px 10px;border-radius:var(--radius-sm);background:var(--ink-100);color:var(--ink-700)}
+.mbs-badge--brand{background:var(--rust-50);color:var(--rust-600)}
+.mbs-badge--accent{background:var(--ember-50);color:var(--ember-700)}
+.mbs-badge--positive{background:var(--positive-soft);color:var(--positive)}
+.mbs-badge--caution{background:var(--caution-soft);color:var(--caution)}
+.mbs-badge--critical{background:var(--critical-soft);color:var(--critical)}
+.mbs-badge--info{background:var(--info-soft);color:var(--info)}
+
+/* ---- Eyebrow (base.css already ships .mbs-eyebrow in accent color; modifiers below) ---- */
+.mbs-eyebrow--brand{color:var(--brand)}
+.mbs-eyebrow--muted{color:var(--text-muted)}
+.mbs-eyebrow--on-dark{color:var(--ember-300)}
+
+/* ---- Input ---- */
+.mbs-field{display:flex;flex-direction:column;gap:6px}
+.mbs-field label{font-size:var(--fs-sm);font-weight:var(--fw-semibold);color:var(--text-body)}
+.mbs-input{width:100%;font-family:var(--font-body);font-size:var(--fs-base);color:var(--text-strong);background:var(--surface-card);border:1px solid var(--border-default);border-radius:var(--radius-md);padding:11px 14px;outline:none;box-sizing:border-box;transition:border-color var(--dur-fast) var(--ease-standard),box-shadow var(--dur-fast) var(--ease-standard)}
+.mbs-input:focus{border-color:var(--accent);box-shadow:var(--ring-focus)}
+.mbs-input--error{border-color:var(--critical)}
+textarea.mbs-input{min-height:96px;resize:vertical;padding:12px 14px}
+.mbs-field-hint{font-size:var(--fs-sm);color:var(--text-muted)}
+.mbs-field-hint--error{color:var(--critical)}

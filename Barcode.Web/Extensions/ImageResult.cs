@@ -25,17 +25,23 @@ public class ImageResult : ActionResult
             throw new ArgumentNullException(nameof(ImageFormat));
         }
 
-        context.HttpContext.Response.ContentType = GetMimeType(ImageFormat);
+        ImageCodecInfo? encoder = GetEncoder(ImageFormat);
+        if (encoder == null)
+        {
+            throw new InvalidOperationException($"No image encoder was found for the format '{ImageFormat}'.");
+        }
+
+        context.HttpContext.Response.ContentType = encoder.MimeType ?? "application/octet-stream";
 
         using var memoryStream = new MemoryStream();
-        Image.Save(memoryStream, ImageFormat);
+        Image.Save(memoryStream, encoder, null);
         memoryStream.Position = 0;
         await memoryStream.CopyToAsync(context.HttpContext.Response.Body);
     }
 
-    private static string GetMimeType(ImageFormat imageFormat)
+    private static ImageCodecInfo? GetEncoder(ImageFormat imageFormat)
     {
         ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
-        return codecs.First(codec => codec.FormatID == imageFormat.Guid).MimeType ?? "application/octet-stream";
+        return codecs.FirstOrDefault(codec => codec.FormatID == imageFormat.Guid);
     }
 }
