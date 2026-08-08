@@ -1,0 +1,51 @@
+@model Cec.Barcode.Models.BarCodeModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h4>Bar Code</h4>
+    <hr />
+
+    <img src="data:image;base64,@System.Convert.ToBase64String(Model.BarcodeByteArray)" width="@Model.Width" height="@Model.Height" />
+
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.AlternateLabel)</dt>
+        <dd>@Html.DisplayFor(model => model.AlternateLabel)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.AspectRatio)</dt>
+        <dd>@Html.DisplayFor(model => model.AspectRatio)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.BarHeight)</dt>
+        <dd>@Html.DisplayFor(model => model.BarHeight)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.BarValue)</dt>
+        <dd>@Html.DisplayFor(model => model.BarValue)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.BarWidth)</dt>
+        <dd>@Html.DisplayFor(model => model.BarWidth)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.EncodedText)</dt>
+        <dd>@Html.DisplayFor(model => model.EncodedText)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.EncodedTypeText)</dt>
+        <dd>@Html.DisplayFor(model => model.EncodedTypeText)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.EncodingTime)</dt>
+        <dd>@Html.DisplayFor(model => model.EncodingTime)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Height)</dt>
+        <dd>@Html.DisplayFor(model => model.Height)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.IncludeLabel)</dt>
+        <dd>@Html.DisplayFor(model => model.IncludeLabel)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Width)</dt>
+        <dd>@Html.DisplayFor(model => model.Width)</dd>
+    </dl>
+</div>
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</p>

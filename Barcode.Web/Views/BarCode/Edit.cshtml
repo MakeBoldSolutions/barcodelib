@@ -1,0 +1,158 @@
+@model Cec.Barcode.Models.BarCodeModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit" asp-route-id="@Model.Id">
+    <div class="form-horizontal">
+        <h4>BarCodeModel</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="AlternateLabel" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="AlternateLabel" class="form-control" />
+                <span asp-validation-for="AlternateLabel" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="BackColor" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input id="BackColor" name="BackColor" class="jscolor" value="@Html.Raw("#" + Model.BackColor.R.ToString("X2") + Model.BackColor.G.ToString("X2") + Model.BackColor.B.ToString("X2"))" />
+                <span asp-validation-for="BackColor" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ForeColor" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input id="ForeColor" name="ForeColor" class="jscolor" value="@Html.Raw("#" + Model.ForeColor.R.ToString("X2") + Model.ForeColor.G.ToString("X2") + Model.ForeColor.B.ToString("X2"))" />
+                <span asp-validation-for="ForeColor" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LabelPosition" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="LabelPosition" asp-items="Html.GetEnumSelectList<Cec.Barcode.Extensions.LabelPositions>()" class="form-control"></select>
+                <span asp-validation-for="LabelPosition" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="AlignmentPosition" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="AlignmentPosition" asp-items="Html.GetEnumSelectList<Cec.Barcode.Extensions.AlignmentPositions>()" class="form-control"></select>
+                <span asp-validation-for="AlignmentPosition" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="EncodedType" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="EncodedType" asp-items="Html.GetEnumSelectList<Cec.Barcode.Extensions.TYPE>()" class="form-control"></select>
+                <span asp-validation-for="EncodedType" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="AspectRatio" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="AspectRatio" class="form-control" />
+                <span asp-validation-for="AspectRatio" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="BarHeight" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="BarHeight" class="form-control" />
+                <span asp-validation-for="BarHeight" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="BarValue" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="BarValue" class="form-control" />
+                <span asp-validation-for="BarValue" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="BarWidth" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="BarWidth" class="form-control" />
+                <span asp-validation-for="BarWidth" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="EncodedText" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="EncodedText" class="form-control" />
+                <span asp-validation-for="EncodedText" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="EncodedTypeText" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="EncodedTypeText" class="form-control" />
+                <span asp-validation-for="EncodedTypeText" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="EncodingTime" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="EncodingTime" class="form-control" />
+                <span asp-validation-for="EncodingTime" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Height" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="Height" class="form-control" />
+                <span asp-validation-for="Height" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="IncludeLabel" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <div class="checkbox">
+                    <input asp-for="IncludeLabel" />
+                    <span asp-validation-for="IncludeLabel" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Width" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="Width" class="form-control" />
+                <span asp-validation-for="Width" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/jscolor/jscolor.js"></script>
+}

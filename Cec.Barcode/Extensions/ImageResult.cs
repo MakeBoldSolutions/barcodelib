@@ -4,10 +4,12 @@
     using System;
     using System.Drawing;
     using System.Drawing.Imaging;
+    using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
 
     //
-    // from https://stackoverflow.com/questions/186062/can-an-asp-net-mvc-controller-return-an-image 
+    // from https://stackoverflow.com/questions/186062/can-an-asp-net-mvc-controller-return-an-image
     //  https://www.danylkoweb.com/Blog/update-dynamically-resizing-your-asp-net-mvc-images-LT
     //
 
@@ -16,23 +18,25 @@
         public ImageResult() { }
         public Image Image { get; set; }
         public ImageFormat ImageFormat { get; set; }
-        //public override void ExecuteResult(ControllerContext context)
-        //{
-        //    // verify properties 
-        //    if (Image == null)
-        //    {
-        //        throw new ArgumentNullException("Image");
-        //    }
-        //    if (ImageFormat == null)
-        //    {
-        //        throw new ArgumentNullException("ImageFormat");
-        //    }
 
-        //    // output 
-        //    context.HttpContext.Response.Clear();
-        //    context.HttpContext.Response.ContentType = GetMimeType(ImageFormat);
-        //    Image.Save(context.HttpContext.Response.OutputStream, ImageFormat);
-        //}
+        public override async Task ExecuteResultAsync(ActionContext context)
+        {
+            if (Image == null)
+            {
+                throw new ArgumentNullException(nameof(Image));
+            }
+            if (ImageFormat == null)
+            {
+                throw new ArgumentNullException(nameof(ImageFormat));
+            }
+
+            context.HttpContext.Response.ContentType = GetMimeType(ImageFormat);
+
+            using var memoryStream = new MemoryStream();
+            Image.Save(memoryStream, ImageFormat);
+            memoryStream.Position = 0;
+            await memoryStream.CopyToAsync(context.HttpContext.Response.Body);
+        }
 
         private static string GetMimeType(ImageFormat imageFormat)
         {
