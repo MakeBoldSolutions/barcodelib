@@ -1,6 +1,8 @@
 @model Barcode.Web.Models.LibraryShowcaseVM
 @{
-    ViewData["Title"] = "Barcode Lab";
+    ViewData["Title"] = "Barcode Generator and QR Code Lab";
+    ViewData["Description"] = "Generate barcodes and QR codes, explore UPC, GS1 Digital Link, and connected product identity demos from Make Bold Spark.";
+    ViewData["Keywords"] = "barcode lab, barcode.makeboldspark.com, QR code, UPC, GS1 Digital Link, Make Bold Spark";
 }
 
 <section class="lab-hero">
@@ -13,11 +15,12 @@
         </p>
         <div class="lab-hero__actions">
             <a class="mbs-btn mbs-btn--primary mbs-btn--lg" href="#experience">Experience the transition</a>
-            <a class="mbs-btn mbs-btn--secondary mbs-btn--lg" asp-controller="BarCode" asp-action="Index">Open Classic Barcode Lab</a>
+            <a class="mbs-btn mbs-btn--secondary mbs-btn--lg" asp-route="barcode">Open Classic Barcode Lab</a>
+            <a class="mbs-btn mbs-btn--ghost mbs-btn--lg" href="@SiteBranding.RepositoryUrl" target="_blank" rel="noopener">View GitHub Repo</a>
         </div>
     </div>
     <div class="package-demo" aria-label="Virtual product package showing a UPC and 2D QR code">
-        <div class="package-demo__brand">ACME COFFEE</div>
+        <div class="package-demo__brand">BOLD COFFEE</div>
         <div class="package-demo__subtitle">Dual-marked demonstration package</div>
         <div class="package-demo__codes">
             <div>
@@ -29,6 +32,22 @@
                 <span>Emerging 2D</span>
             </div>
         </div>
+    </div>
+</section>
+
+<section class="spark-attribution" aria-labelledby="spark-attribution-title">
+    <img src="@SiteBranding.LogoMarkPath" alt="" />
+    <div>
+        <div class="mbs-eyebrow mbs-eyebrow--brand">Make Bold Spark</div>
+        <h2 id="spark-attribution-title">Built by Make Bold Solutions LLC</h2>
+        <p>
+            Barcode Lab is part of the Make Bold Spark family of focused technical tools,
+            examples, and working references.
+        </p>
+    </div>
+    <div class="spark-attribution__actions">
+        <a class="mbs-btn mbs-btn--secondary mbs-btn--sm" href="@SiteBranding.ParentUrl">makeboldspark.com</a>
+        <a class="mbs-btn mbs-btn--ghost mbs-btn--sm" href="@SiteBranding.RepositoryUrl" target="_blank" rel="noopener">GitHub</a>
     </div>
 </section>
 
@@ -86,7 +105,7 @@
         <article>
             <h3>Barcode History</h3>
             <p>Read the full article on UPC standardization, QR, GS1 Digital Link, and the move from lines to links.</p>
-            <a class="mbs-btn mbs-btn--secondary mbs-btn--sm" asp-controller="Home" asp-action="History">Read History</a>
+            <a class="mbs-btn mbs-btn--secondary mbs-btn--sm" asp-route="history">Read History</a>
         </article>
         <article>
             <h3>How QR Works</h3>
@@ -124,8 +143,8 @@
                 </ul>
             </div>
             <img src="/Home/DemoUpcSvg" alt="Classic UPC-A barcode" />
-            <a class="mbs-btn mbs-btn--primary" asp-controller="BarCode" asp-action="Index">Open Generator</a>
-            <a class="mbs-btn mbs-btn--secondary" asp-controller="BarCode" asp-action="Samples">View Samples</a>
+            <a class="mbs-btn mbs-btn--primary" asp-route="barcode">Open Generator</a>
+            <a class="mbs-btn mbs-btn--secondary" asp-route="samples">View Samples</a>
         </article>
         <article class="build-panel">
             <h3>QR Workbench</h3>
@@ -173,14 +192,14 @@
     <div class="experience-grid">
         <article class="scanner-panel">
             <div class="scanner-panel__package">
-                <strong>ACME DARK ROAST</strong>
+                <strong>BOLD DARK ROAST</strong>
                 <div class="scanner-panel__codes">
                     <button type="button" class="scan-trigger is-active" data-scan="upc">
-                        <img src="/Home/DemoUpcSvg" alt="UPC-A barcode for Acme Coffee" />
+                        <img src="/Home/DemoUpcSvg" alt="UPC-A barcode for Bold Coffee" />
                         <span>Scan UPC</span>
                     </button>
                     <button type="button" class="scan-trigger" data-scan="twod">
-                        <img src="/Home/DemoDigitalLinkQrSvg" alt="2D QR code for Acme Coffee lot 2027-C" />
+                        <img src="/Home/DemoDigitalLinkQrSvg" alt="2D QR code for Bold Coffee lot 2027-C" />
                         <span>Scan 2D</span>
                     </button>
                 </div>
@@ -188,7 +207,7 @@
             <div class="scan-result" id="scan-result" aria-live="polite">
                 <span class="result-label">GTIN</span>
                 <strong>012345678905</strong>
-                <p>Database lookup: Acme Dark Roast Coffee, $12.99.</p>
+                <p>Database lookup: Bold Dark Roast Coffee, $12.99.</p>
             </div>
         </article>
 
@@ -221,7 +240,7 @@
         <article class="scanner-panel">
             <h3>Code Inspector</h3>
             <label for="inspector-input" class="form-label">Paste a code payload</label>
-            <textarea id="inspector-input" class="form-control mbs-input" rows="4">https://makeboldsolutions.com/01/00012345678905/10/2027-C</textarea>
+            <textarea id="inspector-input" class="form-control mbs-input" rows="4">@SiteBranding.SiteUrl/01/00012345678905/10/2027-C</textarea>
             <div class="inspector-output" id="inspector-output" aria-live="polite"></div>
         </article>
     </div>

@@ -1,5 +1,40 @@
 @{
     ViewData["Title"] = "History of the Barcode";
+    ViewData["Description"] = "Read the history of barcodes, UPC standardization, QR codes, GS1 Digital Link, and the future of connected product identity.";
+    ViewData["Keywords"] = "barcode history, UPC, QR code, GS1 Digital Link, Sunrise 2027, Make Bold Spark";
+}
+
+@section StructuredData {
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@type": "Article",
+      "@@id": "@SiteBranding.SiteUrl/history#article",
+      "headline": "History of the Barcode: From Lines to Links",
+      "description": "A detailed history of barcodes, UPC standardization, QR codes, GS1 Digital Link, and the future of connected product identity.",
+      "image": "@SiteBranding.SiteUrl@SiteBranding.OgImagePath",
+      "datePublished": "2026-08-08",
+      "dateModified": "2026-08-09",
+      "author": {
+        "@@type": "Organization",
+        "name": "@SiteBranding.OrganizationName",
+        "url": "@SiteBranding.ParentUrl"
+      },
+      "publisher": {
+        "@@type": "Organization",
+        "name": "@SiteBranding.OrganizationName",
+        "url": "@SiteBranding.ParentUrl",
+        "logo": {
+          "@@type": "ImageObject",
+          "url": "@SiteBranding.SiteUrl@SiteBranding.LogoMarkPath"
+        }
+      },
+      "mainEntityOfPage": {
+        "@@type": "WebPage",
+        "@@id": "@SiteBranding.SiteUrl/history#webpage"
+      }
+    }
+    </script>
 }
 
 <article class="history-article">

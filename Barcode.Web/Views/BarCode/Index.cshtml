@@ -2,7 +2,9 @@
 @using System.Drawing
 @using Microsoft.AspNetCore.Routing
 @{
-    ViewData["Title"] = "Classic Barcode Lab";
+    ViewData["Title"] = "Barcode Generator";
+    ViewData["Description"] = "Generate BarcodeLib symbologies including QR Code, UPC-A, EAN-13, and Code 128 with PNG, SVG, and JSON export.";
+    ViewData["Keywords"] = "barcode generator, BarcodeLib, Code 128, UPC, QR code, barcode.makeboldspark.com";
 
     string ForeHex = "#" + Model.ForeColor.R.ToString("X2") + Model.ForeColor.G.ToString("X2") + Model.ForeColor.B.ToString("X2");
     string BackHex = "#" + Model.BackColor.R.ToString("X2") + Model.BackColor.G.ToString("X2") + Model.BackColor.B.ToString("X2");

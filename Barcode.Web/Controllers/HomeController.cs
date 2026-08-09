@@ -60,7 +60,7 @@ public class HomeController : Controller
     public ActionResult MyImage()
     {
         var barCode = new BarcodeLib.Barcode { EncodedType = BarcodeLib.TYPE.CODE93 };
-        barCode.Encode(BarcodeLib.TYPE.CODE93, "makeboldsolutions.com", 290, 120);
+        barCode.Encode(BarcodeLib.TYPE.CODE93, Barcode.Web.SiteBranding.SiteDomain, 290, 120);
         return new ImageResult
         {
             Image = barCode.EncodedImage,
@@ -71,14 +71,14 @@ public class HomeController : Controller
     public ContentResult MySvg()
     {
         var barCode = new BarcodeLib.Barcode { EncodedType = BarcodeLib.TYPE.CODE93 };
-        barCode.Encode(BarcodeLib.TYPE.CODE93, "makeboldsolutions.com", 290, 120);
+        barCode.Encode(BarcodeLib.TYPE.CODE93, Barcode.Web.SiteBranding.SiteDomain, 290, 120);
         return Content(barCode.GetSvg(), "image/svg+xml");
     }
 
     public ActionResult MyQr()
     {
         var qr = new BarcodeLib.Barcode { EncodedType = BarcodeLib.TYPE.QRCODE };
-        var image = qr.Encode(BarcodeLib.TYPE.QRCODE, "https://makeboldsolutions.com/markhazleton/card/", 240, 240);
+        var image = qr.Encode(BarcodeLib.TYPE.QRCODE, Barcode.Web.SiteBranding.SiteUrl, 240, 240);
         return new ImageResult
         {
             Image = image,
@@ -89,7 +89,7 @@ public class HomeController : Controller
     public ContentResult MyQrSvg()
     {
         var qr = new BarcodeLib.Barcode { EncodedType = BarcodeLib.TYPE.QRCODE };
-        qr.Encode(BarcodeLib.TYPE.QRCODE, "https://makeboldsolutions.com/markhazleton/card/", 240, 240);
+        qr.Encode(BarcodeLib.TYPE.QRCODE, Barcode.Web.SiteBranding.SiteUrl, 240, 240);
         return Content(qr.GetSvg(), "image/svg+xml");
     }
 
@@ -108,14 +108,14 @@ public class HomeController : Controller
     public ContentResult DemoDigitalLinkQrSvg()
     {
         var qr = new BarcodeLib.Barcode { EncodedType = BarcodeLib.TYPE.QRCODE };
-        qr.Encode(BarcodeLib.TYPE.QRCODE, "https://makeboldsolutions.com/01/00012345678905/10/2027-C", 260, 260);
+        qr.Encode(BarcodeLib.TYPE.QRCODE, $"{Barcode.Web.SiteBranding.SiteUrl}/01/00012345678905/10/2027-C", 260, 260);
         return Content(qr.GetSvg(), "image/svg+xml");
     }
 
     public ContentResult DemoProfileQrSvg()
     {
         var qr = new BarcodeLib.Barcode { EncodedType = BarcodeLib.TYPE.QRCODE };
-        qr.Encode(BarcodeLib.TYPE.QRCODE, "https://makeboldsolutions.com/markhazleton/card/", 220, 220);
+        qr.Encode(BarcodeLib.TYPE.QRCODE, Barcode.Web.SiteBranding.SiteUrl, 220, 220);
         return Content(qr.GetSvg(), "image/svg+xml");
     }
 

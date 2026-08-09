@@ -157,3 +157,6 @@ $RECYCLE.BIN/
 
 #JetBrains Rider
 .idea
+
+# Local verification output
+artifacts/build-verify/

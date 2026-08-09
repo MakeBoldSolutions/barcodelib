@@ -7,11 +7,11 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <license type="expression">Apache-2.0</license>
-    <projectUrl>https://github.com/bbarnhill/barcodelib</projectUrl>
-    <iconUrl>https://github.com/bbarnhill/barcodelib/blob/master/BarcodeLibTest/Barcode.ico?raw=true</iconUrl>
+    <projectUrl>https://github.com/MakeBoldSolutions/barcodelib</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/MakeBoldSolutions/barcodelib/master/Barcode.Web/wwwroot/favicon.ico</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>https://raw.githubusercontent.com/barnhill/barcodelib/master/BarcodeStandard/Release%20Notes.txt</releaseNotes>
+    <releaseNotes>https://raw.githubusercontent.com/MakeBoldSolutions/barcodelib/master/BarcodeStandard/Release%20Notes.txt</releaseNotes>
     <copyright>Copyright © Brad Barnhill 2007-present</copyright>
     <tags>barcode</tags>
   </metadata>

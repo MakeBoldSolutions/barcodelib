@@ -11,7 +11,7 @@ function renderScanResult(mode) {
     if (mode === "twod") {
         result.innerHTML = [
             '<span class="result-label">Product identity</span>',
-            "<strong>Acme Dark Roast Coffee</strong>",
+            "<strong>Bold Dark Roast Coffee</strong>",
             "<p>GTIN: 00012345678905<br>Lot: 2027-C<br>Best before: 2027-12-15<br>Status: Active</p>",
             "<p>Resources: product information, ingredients, allergens, preparation instructions, recycling, manufacturer.</p>"
         ].join("");
@@ -21,7 +21,7 @@ function renderScanResult(mode) {
     result.innerHTML = [
         '<span class="result-label">GTIN</span>',
         "<strong>012345678905</strong>",
-        "<p>Database lookup: Acme Dark Roast Coffee, $12.99.</p>"
+        "<p>Database lookup: Bold Dark Roast Coffee, $12.99.</p>"
     ].join("");
 }
 

@@ -19,7 +19,7 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  margin-bottom: 96px;
   background: var(--surface-page);
   color: var(--text-body);
   font-family: var(--font-body);
@@ -47,10 +47,18 @@ a:hover {
   box-shadow: none !important;
 }
 .navbar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--font-display);
   font-weight: var(--fw-extrabold);
   color: var(--text-strong) !important;
   letter-spacing: var(--ls-tight);
+}
+.navbar-brand__mark {
+  width: 38px;
+  height: 24px;
+  object-fit: contain;
 }
 .navbar .nav-link {
   font-weight: var(--fw-medium);
@@ -179,10 +187,35 @@ button.accept-policy {
   position: absolute;
   bottom: 0;
   width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+  min-height: 60px;
+  padding: 12px 0;
+  white-space: normal;
+  line-height: 1.4;
   background: var(--surface-card);
   color: var(--text-muted);
+}
+
+.footer .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 0;
+}
+
+.footer .build-stamp {
+  margin-left: auto;
+}
+
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-brand img {
+  width: 30px;
+  height: 18px;
+  object-fit: contain;
 }
 
 /* ---- Barcode Lab homepage ---- */
@@ -709,6 +742,39 @@ button.accept-policy {
   accent-color: var(--brand);
 }
 
+.spark-attribution {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  padding: 30px 0 46px;
+  border-top: 1px solid var(--border-default);
+}
+
+.spark-attribution img {
+  width: 92px;
+  max-width: 100%;
+}
+
+.spark-attribution h2 {
+  margin: 4px 0 8px;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  letter-spacing: 0;
+}
+
+.spark-attribution p {
+  max-width: 680px;
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.spark-attribution__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
 @media (max-width: 992px) {
   .lab-hero,
   .identity-thesis__grid,
@@ -737,9 +803,17 @@ button.accept-policy {
   }
 
   .footer {
-    line-height: 1.4;
     padding: 14px 0;
-    white-space: normal;
+  }
+
+  .footer .container {
+    display: block;
+  }
+
+  .footer .build-stamp {
+    display: block;
+    margin-left: 0;
+    margin-top: 4px;
   }
 
   .lab-hero {
@@ -750,6 +824,14 @@ button.accept-policy {
   .lab-nav-card,
   .scan-trigger {
     width: 100%;
+  }
+
+  .navbar-brand {
+    max-width: calc(100vw - 96px);
+  }
+
+  .navbar-brand span {
+    overflow-wrap: anywhere;
   }
 
   .package-demo {
@@ -783,6 +865,19 @@ button.accept-policy {
 
   .inspector-output dl {
     grid-template-columns: 1fr;
+  }
+
+  .spark-attribution {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .spark-attribution img {
+    width: 76px;
+  }
+
+  .spark-attribution__actions {
+    justify-content: flex-start;
   }
 }
 
@@ -1157,4 +1252,63 @@ button.accept-policy {
     font-size: 1rem;
     line-height: 1.65;
   }
+}
+
+/* ---- Privacy page ---- */
+.privacy-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 34px 0 64px;
+}
+
+.privacy-page__header {
+  padding: clamp(24px, 5vw, 42px);
+  margin-bottom: 24px;
+  background: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+.privacy-page__header h1 {
+  margin: 8px 0 12px;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.privacy-page__header p {
+  max-width: 720px;
+  color: var(--text-muted);
+  font-size: 1.08rem;
+}
+
+.privacy-page__header span {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.privacy-page section {
+  padding: 22px 0;
+  border-top: 1px solid var(--border-default);
+}
+
+.privacy-page h2 {
+  margin-bottom: 10px;
+  font-size: 1.45rem;
+  letter-spacing: 0;
+}
+
+.privacy-page p,
+.privacy-page li {
+  color: var(--text-body);
+  line-height: 1.7;
+}
+
+.privacy-page ul {
+  display: grid;
+  gap: 8px;
+  padding-left: 1.25rem;
 }

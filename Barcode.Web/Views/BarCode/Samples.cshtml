@@ -1,12 +1,14 @@
 @model Barcode.Web.Models.BarcodeSampleViewModel
 @{
-    ViewData["Title"] = "Barcode Samples";
+    ViewData["Title"] = "Barcode and QR Code Samples";
+    ViewData["Description"] = "View generated QR Code, Code 128, and barcode samples for Barcode Lab, the Make Bold Spark barcode subsite.";
+    ViewData["Keywords"] = "barcode samples, QR samples, Code 128, UPC, Barcode Lab, Make Bold Spark";
 }
 
 <section class="sample-hero">
     <div>
         <div class="mbs-eyebrow mbs-eyebrow--brand">Build / Samples</div>
-        <h1>Barcode samples for Make Bold Solutions</h1>
+        <h1>Barcode samples for barcode.makeboldspark.com</h1>
         <p>
             A generated gallery of valid barcode and QR variations for
             <a href="@Model.TargetUrl" target="_blank" rel="noopener">@Model.TargetUrl</a>.
@@ -21,8 +23,8 @@
 </section>
 
 <section class="sample-toolbar" aria-label="Sample page actions">
-    <a class="mbs-btn mbs-btn--primary" asp-controller="BarCode" asp-action="Index" asp-route-BarValue="@Model.TargetUrl" asp-route-EncodedType="QRCODE" asp-route-Width="280" asp-route-Height="280" asp-route-IncludeLabel="false">Open QR in Generator</a>
-    <a class="mbs-btn mbs-btn--secondary" asp-controller="BarCode" asp-action="Index" asp-route-BarValue="@Model.TargetUrl" asp-route-EncodedType="CODE128" asp-route-Width="560" asp-route-Height="150" asp-route-IncludeLabel="true">Open Code 128 in Generator</a>
+    <a class="mbs-btn mbs-btn--primary" asp-route="barcode" asp-route-BarValue="@Model.TargetUrl" asp-route-EncodedType="QRCODE" asp-route-Width="280" asp-route-Height="280" asp-route-IncludeLabel="false">Open QR in Generator</a>
+    <a class="mbs-btn mbs-btn--secondary" asp-route="barcode" asp-route-BarValue="@Model.TargetUrl" asp-route-EncodedType="CODE128" asp-route-Width="560" asp-route-Height="150" asp-route-IncludeLabel="true">Open Code 128 in Generator</a>
 </section>
 
 <section class="sample-grid" aria-label="Valid barcode samples">

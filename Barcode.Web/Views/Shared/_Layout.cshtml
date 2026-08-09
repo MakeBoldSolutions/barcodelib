@@ -1,20 +1,130 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    @{
+        var pageTitle = ViewData["Title"]?.ToString() ?? SiteBranding.SiteName;
+        var fullTitle = pageTitle == SiteBranding.SiteName
+            ? $"{SiteBranding.SiteName} - {SiteBranding.ParentName}"
+            : $"{pageTitle} - {SiteBranding.SiteName} - {SiteBranding.ParentName}";
+        var description = ViewData["Description"]?.ToString() ?? SiteBranding.DefaultDescription;
+        var keywords = ViewData["Keywords"]?.ToString() ?? SiteBranding.DefaultKeywords;
+        var requestPath = Context.Request.Path.HasValue ? Context.Request.Path.Value : "/";
+        requestPath = string.IsNullOrWhiteSpace(requestPath) ? "/" : requestPath;
+        var canonicalUrl = SiteBranding.SiteUrl + (requestPath == "/" ? "/" : requestPath.ToLowerInvariant());
+        var ogImage = ViewData["OgImage"]?.ToString() ?? $"{SiteBranding.SiteUrl}{SiteBranding.OgImagePath}";
+    }
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Barcode.Web</title>
+    <meta name="application-name" content="@SiteBranding.ParentName" />
+    <meta name="author" content="@SiteBranding.OrganizationName" />
+    <meta name="description" content="@description" />
+    <meta name="keywords" content="@keywords" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#040605" />
+    <meta property="og:site_name" content="@SiteBranding.ParentName" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="@canonicalUrl" />
+    <meta property="og:title" content="@fullTitle" />
+    <meta property="og:description" content="@description" />
+    <meta property="og:image" content="@ogImage" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Barcode Lab by Make Bold Spark" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@fullTitle" />
+    <meta name="twitter:description" content="@description" />
+    <meta name="twitter:image" content="@ogImage" />
+    <meta name="twitter:image:alt" content="Barcode Lab by Make Bold Spark" />
+    <link rel="canonical" href="@canonicalUrl" />
+    <link rel="home" href="@SiteBranding.ParentUrl" />
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" asp-append-version="true" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" asp-append-version="true" />
+    <link rel="icon" type="image/png" sizes="32x32" href="~/favicon-32x32.png" asp-append-version="true" />
+    <link rel="icon" type="image/png" sizes="16x16" href="~/favicon-16x16.png" asp-append-version="true" />
+    <link rel="apple-touch-icon" sizes="180x180" href="~/apple-touch-icon.png" asp-append-version="true" />
+    <link rel="manifest" href="~/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#040605" />
+    <title>@fullTitle</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/brand/styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/brand/components.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Barcode.Web.styles.css" asp-append-version="true" />
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@graph": [
+        {
+          "@@type": "Organization",
+          "@@id": "@SiteBranding.ParentUrl/#organization",
+          "name": "@SiteBranding.OrganizationName",
+          "url": "@SiteBranding.ParentUrl",
+          "logo": "@SiteBranding.SiteUrl@SiteBranding.LogoMarkPath"
+        },
+        {
+          "@@type": "WebSite",
+          "@@id": "@SiteBranding.SiteUrl/#website",
+          "name": "@SiteBranding.SiteName",
+          "alternateName": "Barcode Make Bold Spark",
+          "url": "@SiteBranding.SiteUrl/",
+          "description": "@SiteBranding.DefaultDescription",
+          "publisher": {
+            "@@id": "@SiteBranding.ParentUrl/#organization"
+          }
+        },
+        {
+          "@@type": "WebPage",
+          "@@id": "@canonicalUrl#webpage",
+          "name": "@fullTitle",
+          "url": "@canonicalUrl",
+          "description": "@description",
+          "inLanguage": "en-US",
+          "isPartOf": {
+            "@@id": "@SiteBranding.SiteUrl/#website"
+          },
+          "primaryImageOfPage": {
+            "@@type": "ImageObject",
+            "url": "@ogImage",
+            "width": 1200,
+            "height": 630
+          }
+        },
+        {
+          "@@type": "WebApplication",
+          "@@id": "@SiteBranding.SiteUrl/#app",
+          "name": "@SiteBranding.SiteName",
+          "url": "@SiteBranding.SiteUrl/",
+          "codeRepository": "@SiteBranding.RepositoryUrl",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Any",
+          "publisher": {
+            "@@id": "@SiteBranding.ParentUrl/#organization"
+          }
+        },
+        {
+          "@@type": "SoftwareSourceCode",
+          "@@id": "@SiteBranding.RepositoryUrl#source",
+          "name": "MakeBoldSolutions/barcodelib",
+          "codeRepository": "@SiteBranding.RepositoryUrl",
+          "programmingLanguage": "C#",
+          "license": "@SiteBranding.RepositoryUrl/blob/master/LICENSE",
+          "isPartOf": {
+            "@@id": "@SiteBranding.SiteUrl/#app"
+          }
+        }
+      ]
+    }
+    </script>
+    @await RenderSectionAsync("StructuredData", required: false)
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Barcode<span style="color:var(--accent)">.</span>Lab</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" aria-label="Barcode Lab home">
+                    <img src="@SiteBranding.LogoMarkPath" alt="" class="navbar-brand__mark" />
+                    <span>Barcode<span style="color:var(--accent)">.</span>MakeBoldSpark</span>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -25,25 +135,19 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Overview</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index" asp-fragment="learn">Learn</a>
+                            <a class="nav-link" asp-route="history">History</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="History">History</a>
+                            <a class="nav-link" asp-route="barcode">Generator</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index" asp-fragment="build">Build</a>
+                            <a class="nav-link" asp-route="samples">Samples</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index" asp-fragment="experience">Experience</a>
+                            <a class="nav-link" href="@SiteBranding.RepositoryUrl" target="_blank" rel="noopener">GitHub</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="BarCode" asp-action="Index">Classic Generator</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="BarCode" asp-action="Samples">Samples</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-route="privacy">Privacy</a>
                         </li>
                     </ul>
                 </div>
@@ -61,8 +165,14 @@
             @{
                 var buildDate = System.IO.File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location);
             }
-            &copy; 2022-@DateTime.Now.Year - Barcode.Lab - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            <span class="float-end small">Build: @buildDate.ToString("yyyy-MM-dd")</span>
+            <span class="footer-brand"><img src="@SiteBranding.LogoMarkPath" alt="" /> A <a href="@SiteBranding.ParentUrl">Make Bold Spark</a> site</span>
+            <span class="mx-2">|</span>
+            <span>&copy; 2022-@DateTime.Now.Year <a href="@SiteBranding.ParentUrl">Make Bold Solutions LLC</a>. All rights reserved.</span>
+            <span class="mx-2">|</span>
+            <a href="@SiteBranding.RepositoryUrl" target="_blank" rel="noopener">GitHub</a>
+            <span class="mx-2">|</span>
+            <a asp-route="privacy">Privacy</a>
+            <span class="small build-stamp">Build: @buildDate.ToString("yyyy-MM-dd")</span>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

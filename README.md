@@ -1,8 +1,10 @@
-# barcodelib ![Barcode CI](https://github.com/barnhill/barcodelib/workflows/Barcode%20CI/badge.svg) [![NuGet](https://img.shields.io/nuget/v/BarcodeLib.svg)](https://www.nuget.org/packages/BarcodeLib)
+# barcodelib ![Barcode CI](https://github.com/MakeBoldSolutions/barcodelib/workflows/Barcode%20CI/badge.svg) [![NuGet](https://img.shields.io/nuget/v/BarcodeLib.svg)](https://www.nuget.org/packages/BarcodeLib)
 
 ### Overview ###
  
 This library was designed to give an easy class for developers to use when they need to generate barcode images from a string of data.
+
+Repository: [https://github.com/MakeBoldSolutions/barcodelib](https://github.com/MakeBoldSolutions/barcodelib)
 
 |   Supported   |  Symbology    | List  |
 | :------------- | :------------- | :-----|
@@ -38,4 +40,4 @@ If you find this or any of my software useful and decide its worth supporting.  
 
 ### Copyright and license ###
 
-Copyright 2007-2022 Brad Barnhill. Code released under the [Apache License, Version 2.0](https://github.com/bbarnhill/barcodelib/blob/master/LICENSE).
+Copyright 2007-2022 Brad Barnhill. Code released under the [Apache License, Version 2.0](https://github.com/MakeBoldSolutions/barcodelib/blob/master/LICENSE).

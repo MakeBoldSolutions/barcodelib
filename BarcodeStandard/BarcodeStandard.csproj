@@ -10,8 +10,8 @@
     <Authors>Brad Barnhill</Authors>
     <Description>This library was designed to give an easy class for developers to use when they need to generate barcode images from a string of data.</Description>
     <Copyright>Copyright 2007-2021 Brad Barnhill</Copyright>
-    <PackageProjectUrl>https://github.com/barnhill/barcodelib</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/barnhill/barcodelib.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/MakeBoldSolutions/barcodelib</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MakeBoldSolutions/barcodelib.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
