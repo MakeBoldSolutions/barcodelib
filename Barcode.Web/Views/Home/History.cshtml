@@ -1,0 +1,390 @@
+@{
+    ViewData["Title"] = "History of the Barcode";
+}
+
+<article class="history-article">
+    <div class="history-article__masthead">
+        <div class="mbs-eyebrow mbs-eyebrow--brand">Learn / History</div>
+        <h1>From Lines to Links</h1>
+        <p>A detailed history of barcodes, UPC standardization, and the 2D future of product identity.</p>
+    </div>
+    <div class="history-article__content">
+        <h2 id="executive-summary">Executive summary</h2>
+        <p>The barcode began as a deceptively simple solution to a hard business problem: how to identify physical objects quickly, consistently, and cheaply. Its early history runs through grocery checkout lines, railroad yards, optical scanning, punch-card thinking, industry committees, and the economics of standardization. The Universal Product Code (UPC) did not win because it was the only possible symbol. It won because retailers, manufacturers, technology companies, and standards bodies converged on a shared machine-readable identity system at exactly the point when scanners, computers, packaging, and retail operations were ready for it.</p>
+        <p>That same pattern is happening again.</p>
+        <p>The classic UPC and EAN barcode made products machine-readable. The next generation of 2D barcodes, including QR Codes powered by GS1 and GS1 DataMatrix, makes products more data-rich and web-addressable. The future is not simply "QR codes replacing barcodes." The deeper shift is from a printed identifier that points into a retailer database to a persistent digital identity that can support checkout, product information, lot-level tracking, expiration control, recalls, sustainability data, authentication, digital product passports, and consumer engagement.</p>
+        <p>GS1's current retail target, commonly discussed as Sunrise 2027, aims for retail point-of-sale systems to be able to read and process 2D barcodes by the end of 2027 while continuing to support legacy UPC/EAN symbols. During the transition, many products will carry both a traditional 1D barcode and a 2D barcode. After the transition, the business opportunity is not just better packaging graphics or more consumer links. It is a product-data architecture in which a physical item, a digital identifier, a resolver, and multiple online resources work together.</p>
+        <hr />
+        <h2 id="1-before-the-barcode-the-old-problem-of-identifying-physical-things">1. Before the barcode: the old problem of identifying physical things</h2>
+        <p>Modern barcodes are usually discussed as retail technology, but the underlying problem is older and broader than grocery checkout. Every complex business network eventually faces the same questions:</p>
+        <ul>
+        <li>What is this object?</li>
+        <li>Who made it?</li>
+        <li>Where is it going?</li>
+        <li>What information must follow it?</li>
+        <li>How can another party read that information without retyping it?</li>
+        <li>How can many companies agree on the same meaning?</li>
+        </ul>
+        <p>The barcode is one answer to those questions. It is not just a graphic. It is a compact treaty between physical goods and information systems.</p>
+        <p>Long before the UPC appeared at supermarket checkout, other industries were experimenting with machine-readable identity. Railroads, for example, needed to identify freight cars moving across a national network. In the 1960s, North American railroads tested KarTrak, a colored barcode-like Automatic Car Identification system. AAR describes KarTrak as a stack of colored labels that encoded railcar information and could be read by trackside scanners; by the mid-1970s, roughly 90% of U.S. railcars carried KarTrak labels, but dirt, weather, and wear made the labels unreliable, and the system was eventually replaced by RFID-based Automatic Equipment Identification tags.<sup><a href="#fn-aar-kartrak" id="fnref-aar-kartrak-1" aria-label="Source note aar-kartrak">[aar-kartrak]</a></sup></p>
+        <p>KarTrak did not become the enduring barcode platform, but it demonstrated the core premise: a physical object can carry a machine-readable identity, and that identity can feed a larger information system.</p>
+        <p>Retail had the same problem, but at a different scale. A supermarket was not tracking thousands of railcars. It was processing tens of thousands of individual consumer products, each with price changes, inventory implications, manufacturer relationships, and checkout-line consequences. By the late 1960s, the grocery industry needed more than faster cashiers. It needed a common data system.</p>
+        <hr />
+        <h2 id="2-the-invention-woodland-silver-morse-code-and-the-bull-s-eye">2. The invention: Woodland, Silver, Morse code, and the bull's-eye</h2>
+        <p>The conceptual origin of the barcode is usually traced to Norman Joseph Woodland and Bernard Silver. In 1948, Silver, then a graduate student at Drexel Institute of Technology, reportedly overheard a supermarket executive asking for research into a way to capture product information automatically. Silver brought the problem to Woodland, who began working on possible machine-readable codes.<sup><a href="#fn-ibm-upc" id="fnref-ibm-upc-1" aria-label="Source note ibm-upc">[ibm-upc]</a></sup></p>
+        <p>Woodland's famous insight came from extending the dots and dashes of Morse code into printed marks. IBM's historical account describes Woodland drawing uneven parallel lines in sand and realizing that wide and narrow lines could represent data. Woodland and Silver then transformed the idea into a bull's-eye pattern of concentric circles so it could be read from multiple directions.<sup><a href="#fn-ibm-upc" id="fnref-ibm-upc-2" aria-label="Source note ibm-upc">[ibm-upc]</a></sup></p>
+        <p>Their patent, <em>Classifying Apparatus and Method</em>, was filed in 1949 and issued as U.S. Patent 2,612,994 in 1952. The patent describes using light and dark line patterns to classify articles, assigning binary meaning to occupied and vacant line positions, and modifying a straight-line pattern into a circular pattern to reduce orientation requirements.<sup><a href="#fn-woodland-silver-patent" id="fnref-woodland-silver-patent-1" aria-label="Source note woodland-silver-patent">[woodland-silver-patent]</a></sup></p>
+        <p>The idea was brilliant, but premature. Early scanning required intense illumination and photoelectric technology that was too expensive and impractical for everyday retail. IBM notes that the early implementation required a 500-watt light and specialized detection equipment, and Woodland and Silver sold the patent for $15,000.<sup><a href="#fn-ibm-upc" id="fnref-ibm-upc-3" aria-label="Source note ibm-upc">[ibm-upc]</a></sup></p>
+        <p>This is a recurring theme in barcode history: the idea arrived before the ecosystem was ready.</p>
+        <hr />
+        <h2 id="3-the-grocery-industry-creates-the-market-conditions">3. The grocery industry creates the market conditions</h2>
+        <p>The UPC did not emerge because one inventor alone convinced the world. It emerged because an industry created a shared problem statement.</p>
+        <p>By 1970, grocery retailers and packaged-goods manufacturers had converged on the need for a standard machine-readable symbol. IBM's history says grocery retailers and manufacturers made a unified call in 1970 for a standard symbol that could help supermarkets manage inventory; the industry formed the Ad Hoc Committee on a Uniform Grocery Product Code and requested proposals.<sup><a href="#fn-ibm-upc" id="fnref-ibm-upc-4" aria-label="Source note ibm-upc">[ibm-upc]</a></sup></p>
+        <p>The problems were practical:</p>
+        <ul>
+        <li>checkout was slow;</li>
+        <li>price tagging was labor-intensive;</li>
+        <li>manual key entry created errors;</li>
+        <li>retailers lacked timely item-level sales data;</li>
+        <li>manufacturers and retailers needed a common product-identification language.</li>
+        </ul>
+        <p>The system had to serve many interests at once. Retailers wanted faster checkout and better inventory visibility. Manufacturers wanted their products reliably identified across stores. Consumers wanted accuracy, though many initially worried about losing printed price labels. Technology suppliers wanted to sell scanners, registers, and computing infrastructure. None of that would work if every company used its own code.</p>
+        <p>The result was not merely a barcode. It was a standardization program.</p>
+        <hr />
+        <h2 id="4-ibm-george-laurer-and-the-linear-upc">4. IBM, George Laurer, and the linear UPC</h2>
+        <p>The famous rectangular UPC symbol was developed at IBM under George Laurer. IBM's account says Laurer led IBM's response to the grocery industry's request, designing a reliable, scalable black-bar symbol that could be scanned by lasers at point of sale.<sup><a href="#fn-ibm-upc" id="fnref-ibm-upc-5" aria-label="Source note ibm-upc">[ibm-upc]</a></sup></p>
+        <p>There was competition over symbol design. RCA had rights to the earlier bull's-eye concept, but the bull's-eye had a practical weakness: printing distortion. IBM's history states that Laurer objected to the bull's-eye because it was prone to smearing when printed. He proposed a linear symbol instead, one that could fit the packaging environment, be printed consistently, and be scanned omnidirectionally by a laser system.<sup><a href="#fn-ibm-upc" id="fnref-ibm-upc-6" aria-label="Source note ibm-upc">[ibm-upc]</a></sup></p>
+        <p>IBM describes the presented UPC format as including black and blank vertical lines that encoded information using binary patterns. The symbol included human-readable digits below the bars so a cashier could manually enter the number if scanning failed.<sup><a href="#fn-ibm-upc" id="fnref-ibm-upc-7" aria-label="Source note ibm-upc">[ibm-upc]</a></sup></p>
+        <p>The UPC was officially selected in 1973. GS1's historical timeline dates the creation of the barcode by U.S. grocery industry leaders to April 3, 1973.<sup><a href="#fn-gs1-timeline" id="fnref-gs1-timeline-1" aria-label="Source note gs1-timeline">[gs1-timeline]</a></sup> IBM states that the Universal Product Code was born on April 1, 1973, and that the Uniform Product Code Council was established soon after to organize standards and assign UPC numbers.<sup><a href="#fn-ibm-upc" id="fnref-ibm-upc-8" aria-label="Source note ibm-upc">[ibm-upc]</a></sup></p>
+        <p>The exact date phrasing varies across sources, but the point is clear: 1973 was when the grocery barcode became an operational industry standard, not just an invention.</p>
+        <hr />
+        <h2 id="5-june-26-1974-the-first-upc-scan">5. June 26, 1974: the first UPC scan</h2>
+        <p>The symbolic moment came on June 26, 1974, at a Marsh supermarket in Troy, Ohio. The Smithsonian's National Museum of American History records that the first installation of supermarket scanners entered service there and that a package of Wrigley's chewing gum became the first purchase made with scanners that could read the new Uniform Product Code.<sup><a href="#fn-smithsonian-scanner" id="fnref-smithsonian-scanner-1" aria-label="Source note smithsonian-scanner">[smithsonian-scanner]</a></sup></p>
+        <p>The scanner itself was a system, not just a laser window. According to the Smithsonian, a Spectra Physics Model A scanner used a helium-neon laser projected onto a rotating mirror and up through glass; reflected light from the barcode was detected by a photodiode, and a computerized cash register matched the signal to information in a stored database.<sup><a href="#fn-smithsonian-scanner" id="fnref-smithsonian-scanner-2" aria-label="Source note smithsonian-scanner">[smithsonian-scanner]</a></sup></p>
+        <p>That description matters. The first scan did not mean that the barcode contained the price, product name, brand story, nutrition facts, or inventory policy. The barcode carried an identifier. The computer system behind it supplied meaning.</p>
+        <p>This architecture was the foundation of retail automation:</p>
+        <pre><code>Printed UPC -&gt; scanner -&gt; product identifier -&gt; retailer database -&gt; price/product record</code></pre>
+        <p>A pack of gum became the gateway to a new economy of item-level data.</p>
+        <hr />
+        <h2 id="6-why-upc-worked-standards-not-just-symbols">6. Why UPC worked: standards, not just symbols</h2>
+        <p>The UPC succeeded because it combined three things:</p>
+        <ol>
+        <li><strong>A data carrier</strong>: the printed linear barcode.</li>
+        <li><strong>An identification system</strong>: a standardized product number.</li>
+        <li><strong>An institutional administrator</strong>: a standards body to allocate, govern, and maintain the system.</li>
+        </ol>
+        <p>GS1's timeline says the U.S.-based Uniform Code Council (UCC) was appointed in 1974 as administrator of the new UPC barcode.<sup><a href="#fn-gs1-timeline" id="fnref-gs1-timeline-2" aria-label="Source note gs1-timeline">[gs1-timeline]</a></sup> In 1977, the European Article Numbering Association (EAN) was established in Brussels, and GS1 notes that the EAN barcode was fully compatible with the U.S. UPC barcode.<sup><a href="#fn-gs1-timeline" id="fnref-gs1-timeline-3" aria-label="Source note gs1-timeline">[gs1-timeline]</a></sup></p>
+        <p>This compatibility was crucial. A manufacturer, retailer, or scanner vendor could invest in the system because the symbol was not a local trick. It was becoming a shared commercial infrastructure.</p>
+        <p>The distinction between a <strong>barcode</strong> and a <strong>product identifier</strong> is still important today:</p>
+        <ul>
+        <li>The barcode is the printed or displayed machine-readable symbol.</li>
+        <li>The identifier is the standardized value encoded in that symbol.</li>
+        <li>The database or resolver supplies the business meaning.</li>
+        </ul>
+        <p>Many technical discussions confuse these layers. The UPC was powerful because it aligned all three.</p>
+        <hr />
+        <h2 id="7-the-spread-of-one-dimensional-symbologies">7. The spread of one-dimensional symbologies</h2>
+        <p>The UPC was not the only one-dimensional barcode. Once barcode scanners and printers became practical, different industries needed different encodings.</p>
+        <p>The general pattern was:</p>
+        <ul>
+        <li>retail needed compact numeric product identification;</li>
+        <li>manufacturing needed alphanumeric part and work-order codes;</li>
+        <li>logistics needed dense shipping labels;</li>
+        <li>healthcare needed product, lot, expiration, and later serialization;</li>
+        <li>libraries, airlines, warehouses, and postal services each needed domain-specific formats.</li>
+        </ul>
+        <p>This led to many symbologies, including Code 39, Interleaved 2 of 5, Codabar, Code 128, GS1-128, and others.</p>
+        <p>Code 39 was especially important because it could encode alphabetic characters as well as digits and became widely used in industrial and defense contexts. Code 128 later offered higher density and broader character support, and ISO/IEC 15417 defines the Code 128 barcode symbology specification.<sup><a href="#fn-iso-code128" id="fnref-iso-code128-1" aria-label="Source note iso-code128">[iso-code128]</a></sup></p>
+        <p>The point is not that one format replaced another. Barcode history is a history of specialization. A symbology is a tool optimized for constraints: data type, data length, print area, scanner type, error detection, print technology, and industry practice.</p>
+        <hr />
+        <h2 id="8-global-standardization-from-ucc-and-ean-to-gs1">8. Global standardization: from UCC and EAN to GS1</h2>
+        <p>The global barcode ecosystem matured through standards governance.</p>
+        <p>GS1's timeline gives a compact view of this consolidation:</p>
+        <ul>
+        <li>1973: U.S. grocery industry leaders created the barcode standard.</li>
+        <li>1974: UCC was appointed administrator of the UPC.</li>
+        <li>1977: EAN was established in Brussels, with EAN compatible with UPC.</li>
+        <li>1983: traditional barcodes expanded beyond checkout to wholesale multipacks, cases, and cartons.</li>
+        <li>1989: GS1 published its first international EDI standard.</li>
+        <li>2005: UCC and EAN merged into a single international organization with 101 local GS1 Member Organizations.<sup><a href="#fn-gs1-timeline" id="fnref-gs1-timeline-4" aria-label="Source note gs1-timeline">[gs1-timeline]</a></sup></li>
+        </ul>
+        <p>This matters because the barcode is not just a technical artifact. It is an operating agreement among manufacturers, retailers, distributors, regulators, software vendors, scanner companies, label printers, logistics providers, and industry-specific systems.</p>
+        <p>The core GS1 standards today define much more than the printed bars. GS1 describes its General Specifications as the core standards document for the GS1 system, describing how GS1 barcodes and identification keys should be used.<sup><a href="#fn-gs1-general-specs" id="fnref-gs1-general-specs-1" aria-label="Source note gs1-general-specs">[gs1-general-specs]</a></sup></p>
+        <hr />
+        <h2 id="9-iso-and-the-formalization-of-symbologies">9. ISO and the formalization of symbologies</h2>
+        <p>As barcode technology matured, symbologies were formalized by international standards. ISO/IEC standards specify not only what a symbol looks like but also encoding methods, dimensions, error correction, decoding requirements, and production-quality expectations.</p>
+        <p>Examples include:</p>
+        <div class="history-table"><table><thead><tr><th>Symbology</th><th>Standardization significance</th></tr></thead><tbody>
+        <tr><td>EAN/UPC</td><td>ISO/IEC 15420 defines the EAN/UPC barcode symbology specification.<sup><a href="#fn-iso-ean-upc" id="fnref-iso-ean-upc-1" aria-label="Source note iso-ean-upc">[iso-ean-upc]</a></sup></td></tr>
+        <tr><td>Code 128</td><td>ISO/IEC 15417 specifies Code 128, one of the major high-density 1D symbologies.<sup><a href="#fn-iso-code128" id="fnref-iso-code128-2" aria-label="Source note iso-code128">[iso-code128]</a></sup></td></tr>
+        <tr><td>QR Code</td><td>ISO/IEC 18004 specifies QR Code characteristics, encoding methods, formats, dimensions, error correction, decoding, production quality, and user-selectable parameters.<sup><a href="#fn-iso-qr" id="fnref-iso-qr-1" aria-label="Source note iso-qr">[iso-qr]</a></sup></td></tr>
+        <tr><td>Data Matrix</td><td>ISO/IEC 16022 defines Data Matrix characteristics, encoding, formats, dimensions, print quality, error correction, and decoding.<sup><a href="#fn-iso-data-matrix" id="fnref-iso-data-matrix-1" aria-label="Source note iso-data-matrix">[iso-data-matrix]</a></sup></td></tr>
+        <tr><td>GS1 DataBar</td><td>ISO/IEC 24724 defines the GS1 DataBar family, formerly Reduced Space Symbology.<sup><a href="#fn-iso-databar" id="fnref-iso-databar-1" aria-label="Source note iso-databar">[iso-databar]</a></sup></td></tr>
+        </tbody></table></div>
+        <p>This standardization made scanners and software interoperable. Without it, every barcode generator and every scanner would be an island.</p>
+        <hr />
+        <h2 id="10-the-move-from-1d-to-2d">10. The move from 1D to 2D</h2>
+        <p>One-dimensional barcodes encode data along a single axis. They are efficient for short identifiers, but they are limited. A UPC-A symbol carries a 12-digit identifier. That is enough to identify a trade item, but not enough to carry lot, serial, expiration, instructions, URLs, sustainability claims, authentication data, or consumer-facing content.</p>
+        <p>Two-dimensional barcodes encode information across a grid. That allows far greater data density and more robust error correction. The 2D shift did not happen all at once. It emerged in waves:</p>
+        <ul>
+        <li>PDF417 for stacked 2D applications such as documents and transport;</li>
+        <li>Data Matrix for compact industrial and healthcare marking;</li>
+        <li>QR Code for high-speed scanning, larger payloads, and later smartphone interaction;</li>
+        <li>Aztec Code for tickets and transport use cases;</li>
+        <li>GS1 DataMatrix for healthcare and regulated products;</li>
+        <li>QR Code with GS1 Digital Link for consumer and retail applications.</li>
+        </ul>
+        <p>The business driver is the same as in the 1970s: more information must be attached to physical objects, and typing it manually is too slow, inaccurate, and expensive.</p>
+        <hr />
+        <h2 id="11-qr-code-born-in-manufacturing-adopted-by-consumers">11. QR Code: born in manufacturing, adopted by consumers</h2>
+        <p>QR Code was developed by DENSO WAVE in 1994. DENSO's history says the QR Code originated from manufacturing-site demands. As manufacturing moved from mass production to more flexible, high-mix production, more detailed production control required more data than ordinary barcodes could conveniently carry.<sup><a href="#fn-denso-qr-dev" id="fnref-denso-qr-dev-1" aria-label="Source note denso-qr-dev">[denso-qr-dev]</a></sup></p>
+        <p>DENSO describes the old problem clearly: multiple barcodes were sometimes used to compensate for low capacity, but because each barcode could hold only about 20 alphabetic characters, workers might scan as many as 1,000 barcodes per day.<sup><a href="#fn-denso-qr-dev" id="fnref-denso-qr-dev-2" aria-label="Source note denso-qr-dev">[denso-qr-dev]</a></sup></p>
+        <p>The QR Code addressed several constraints at once:</p>
+        <ul>
+        <li>high data capacity;</li>
+        <li>compact size;</li>
+        <li>fast scanning;</li>
+        <li>support for Kanji characters;</li>
+        <li>damage tolerance;</li>
+        <li>recognition from multiple orientations;</li>
+        <li>suitability for manufacturing environments.</li>
+        </ul>
+        <p>DENSO's 30th-anniversary materials state that QR Code could hold approximately 7,000 numeric characters and that the QR Code became ISO certified in 2000.<sup><a href="#fn-denso-qr-30" id="fnref-denso-qr-30-1" aria-label="Source note denso-qr-30">[denso-qr-30]</a></sup> DENSO also lists QR Code standardization milestones including AIM International in 1997, JEIDA in 1998, JIS in 1999, and ISO/IEC 18004 in 2000.<sup><a href="#fn-denso-qr-30" id="fnref-denso-qr-30-2" aria-label="Source note denso-qr-30">[denso-qr-30]</a></sup></p>
+        <p>The QR Code became much more visible after mobile phones and later smartphones could scan it. DENSO notes that mobile phones equipped with QR scanning went on sale in 2002, making it easy to access mobile websites and coupons by scanning.<sup><a href="#fn-denso-qr-30" id="fnref-denso-qr-30-3" aria-label="Source note denso-qr-30">[denso-qr-30]</a></sup></p>
+        <p>QR's consumer adoption was not linear. In many markets, early QR campaigns were awkward: users needed dedicated apps, mobile websites were poor, and codes often led to low-value marketing pages. The later smartphone-camera integration and pandemic-era normalization of QR scanning changed consumer expectations. The modern QR Code is now familiar as a bridge between physical surfaces and digital resources.</p>
+        <hr />
+        <h2 id="12-data-matrix-the-industrial-and-healthcare-workhorse">12. Data Matrix: the industrial and healthcare workhorse</h2>
+        <p>QR Code gets the cultural attention, but Data Matrix is equally important in the future of product tracking. Data Matrix is compact, robust, and well suited to small packages and direct part marking. ISO/IEC 16022 defines the Data Matrix symbology and specifies its encoding, formats, print quality, error correction, decoding algorithm, and related parameters.<sup><a href="#fn-iso-data-matrix" id="fnref-iso-data-matrix-2" aria-label="Source note iso-data-matrix">[iso-data-matrix]</a></sup></p>
+        <p>Healthcare shows why 2D matters. The CDC explains that linear barcodes on vaccines traditionally contained only product identification information, while 2D vaccine barcodes can contain product identification, lot number, and expiration date. CDC states that scanning 2D barcodes can replace manual entry, improve data accuracy and completeness, and support safer patient care.<sup><a href="#fn-cdc-vaccine-2d" id="fnref-cdc-vaccine-2d-1" aria-label="Source note cdc-vaccine-2d">[cdc-vaccine-2d]</a></sup></p>
+        <p>That is the same pattern likely to expand in retail:</p>
+        <pre><code>1D barcode: product identification only
+2D barcode: product identification + lot + expiration + serial + digital resources</code></pre>
+        <p>Healthcare adopted these capabilities earlier because patient safety, lot-level traceability, and regulated supply chains made the benefits urgent.</p>
+        <hr />
+        <h2 id="13-gs1-application-identifiers-turning-a-barcode-into-structured-data">13. GS1 Application Identifiers: turning a barcode into structured data</h2>
+        <p>A barcode can carry a string of characters, but a business system needs to know what each part of the string means. GS1 Application Identifiers (AIs) solve that problem.</p>
+        <p>GS1 describes Application Identifiers as prefixes used in barcodes and EPC/RFID tags to define the meaning and format of data attributes. The GS1 AI system supports product data beyond the GTIN, including batch/lot number, serial number, best-before date, and expiration date.<sup><a href="#fn-gs1-ai" id="fnref-gs1-ai-1" aria-label="Source note gs1-ai">[gs1-ai]</a></sup></p>
+        <p>For example, in GS1 element-string style:</p>
+        <pre><code>(01)09520123456788(17)270104(10)ABC123</code></pre>
+        <p>This can be interpreted as:</p>
+        <ul>
+        <li>AI 01: GTIN</li>
+        <li>AI 17: expiration date</li>
+        <li>AI 10: batch or lot</li>
+        </ul>
+        <p>That distinction matters. A 2D barcode does not become useful merely because it contains more characters. It becomes useful when data elements are structured, standardized, and consistently interpreted by scanners and downstream software.</p>
+        <hr />
+        <h2 id="14-gs1-digital-link-the-barcode-becomes-a-web-address">14. GS1 Digital Link: the barcode becomes a web address</h2>
+        <p>GS1 Digital Link is the bridge between product identifiers and the web. Its central idea is that GS1 identifiers can be expressed in a standards-based URI format so that a code can be read as both a product identifier and a web link.</p>
+        <p>The GS1 Digital Link URI syntax standard says that its normative portions define Web addresses that encode GS1 identifiers and informative data with the same precision as GS1 element-string syntax.<sup><a href="#fn-gs1-dl-uri" id="fnref-gs1-dl-uri-1" aria-label="Source note gs1-dl-uri">[gs1-dl-uri]</a></sup> It distinguishes among primary identification keys such as GTIN, key qualifiers such as batch/lot, and attributes such as expiry date.<sup><a href="#fn-gs1-dl-uri" id="fnref-gs1-dl-uri-2" aria-label="Source note gs1-dl-uri">[gs1-dl-uri]</a></sup></p>
+        <p>GS1 explicitly notes an important design feature: a GS1 Digital Link URI is a particular form of URL and can be used in the same way as any other URL, but it can also serve as a gateway to multiple sources of human- and machine-readable information.<sup><a href="#fn-gs1-dl-uri" id="fnref-gs1-dl-uri-3" aria-label="Source note gs1-dl-uri">[gs1-dl-uri]</a></sup></p>
+        <p>A simple example looks like this:</p>
+        <pre><code>https://brand.example.com/01/09520123456788</code></pre>
+        <p>A richer example might include lot and expiration:</p>
+        <pre><code>https://brand.example.com/01/09520123456788/10/ABC123?17=270104</code></pre>
+        <p>The code can be printed as a QR Code, and a consumer phone can open it as a URL. A retailer or supply-chain system can parse it as structured GS1 data. A resolver can route the same identity to different resources: product information, allergen data, traceability, recall status, recycling instructions, regulatory data, or machine-readable APIs.</p>
+        <p>This is the core architectural leap:</p>
+        <pre><code>UPC era:
+physical product -&gt; printed barcode -&gt; item number -&gt; retailer database
+
+Digital Link era:
+physical product -&gt; 2D code -&gt; web-addressable identity -&gt; resolver -&gt; many resources</code></pre>
+        <hr />
+        <h2 id="15-resolvers-why-the-future-is-not-just-a-bigger-barcode">15. Resolvers: why the future is not just a bigger barcode</h2>
+        <p>A common misunderstanding is that a 2D barcode should contain all information directly. That is usually the wrong model. Product information changes; printed packaging does not.</p>
+        <p>Resolvers solve this problem. A resolver receives a Digital Link URI and helps direct a user, app, scanner, or enterprise system to the right resource. GS1's resolver standard states that the input to a GS1-Conformant Resolver is a GS1 Digital Link URI.<sup><a href="#fn-gs1-resolver" id="fnref-gs1-resolver-1" aria-label="Source note gs1-resolver">[gs1-resolver]</a></sup> GS1's system architecture also describes resolver capability as a way to link a GS1 Digital Link URI to one or more relevant information sources and services.<sup><a href="#fn-gs1-system-architecture" id="fnref-gs1-system-architecture-1" aria-label="Source note gs1-system-architecture">[gs1-system-architecture]</a></sup></p>
+        <p>This is why the future of barcodes is not only about the printed symbol. It is about infrastructure:</p>
+        <ul>
+        <li>persistent identifiers;</li>
+        <li>HTTPS domains;</li>
+        <li>resolver services;</li>
+        <li>product master data;</li>
+        <li>supply-chain event data;</li>
+        <li>consumer content;</li>
+        <li>regulatory information;</li>
+        <li>APIs;</li>
+        <li>scanner behavior;</li>
+        <li>POS system upgrades;</li>
+        <li>governance and trust.</li>
+        </ul>
+        <p>In the UPC era, most value came from the retailer's product database. In the Digital Link era, value comes from a broader network of product data and services.</p>
+        <hr />
+        <h2 id="16-sunrise-2027-what-the-deadline-really-means">16. Sunrise 2027: what the deadline really means</h2>
+        <p>The retail industry is now preparing for wider 2D barcode use at point of sale. GS1's timeline says that in 2021, GS1 supported industry with an ambition to read two-dimensional barcodes, including QR codes and GS1 DataMatrix barcodes, at retail points of sale around the world by the end of 2027.<sup><a href="#fn-gs1-timeline" id="fnref-gs1-timeline-5" aria-label="Source note gs1-timeline">[gs1-timeline]</a></sup></p>
+        <p>GS1 US describes the transition as brand owners adding 2D barcodes to packaging while retailers upgrade POS systems for 2D scanning and processing. During the transition, items will require dual marking with UPC and 2D barcodes. After the 2027 sunrise date, the goal is that 2D barcodes, including those encoded with GS1 Digital Link, can be scanned at POS by all retailers, while UPC barcodes will continue to be accepted and scanned after the sunrise date.<sup><a href="#fn-gs1us-retailers" id="fnref-gs1us-retailers-1" aria-label="Source note gs1us-retailers">[gs1us-retailers]</a></sup></p>
+        <p>That last point is important. 2027 is not a legal kill date for UPC. It is a readiness target for retail scanning infrastructure.</p>
+        <p>The operational challenge is significant. Retailers must handle both old and new symbols. Scanners must avoid duplicate reads when a package carries both a UPC and a 2D barcode. POS software must parse GTIN and additional attributes. Product-data systems must know what to do with lot, serial, and expiration information. Brands must redesign packaging and product-data workflows. Standards bodies must keep implementation details consistent.</p>
+        <p>Sunrise 2027 is therefore less about the moment a symbol changes and more about the beginning of a new capability layer.</p>
+        <hr />
+        <h2 id="17-what-new-capabilities-become-possible">17. What new capabilities become possible?</h2>
+        <p>The classic UPC answers one question well:</p>
+        <blockquote>
+        <p>What trade item is this?</p>
+        </blockquote>
+        <p>The emerging 2D model can help answer more questions:</p>
+        <ul>
+        <li>What trade item is this?</li>
+        <li>Which lot or batch is it from?</li>
+        <li>What is its expiration date?</li>
+        <li>Is it recalled?</li>
+        <li>Is it authentic?</li>
+        <li>What instructions, ingredients, allergens, or warnings apply?</li>
+        <li>What sustainability or recycling information is relevant?</li>
+        <li>What digital product passport is associated with it?</li>
+        <li>What should a consumer, store associate, warehouse worker, regulator, or recycler see?</li>
+        </ul>
+        <p>GS1 US lists possible Digital Link use cases including flagging recalled, expired, or counterfeit products, automatically discounting products nearing or past expiration, improving returns, and improving B2B data sharing.<sup><a href="#fn-gs1us-retailers" id="fnref-gs1us-retailers-2" aria-label="Source note gs1us-retailers">[gs1us-retailers]</a></sup></p>
+        <p>This produces concrete retail scenarios:</p>
+        <h3 id="expiration-aware-checkout">Expiration-aware checkout</h3>
+        <p>A product's 2D code includes GTIN and expiration date. The POS system recognizes that the item is past date and blocks sale or prompts store policy.</p>
+        <h3 id="lot-specific-recall">Lot-specific recall</h3>
+        <p>A recall applies to lot ABC123, not every unit of the product. Scanning the 2D code lets the system distinguish affected and unaffected inventory.</p>
+        <h3 id="dynamic-markdown">Dynamic markdown</h3>
+        <p>A fresh-food product nearing expiration can be automatically discounted based on encoded date and store policy.</p>
+        <h3 id="consumer-transparency">Consumer transparency</h3>
+        <p>The same code directs a shopper to product details, allergens, recipes, sustainability claims, instructions, or brand-controlled content.</p>
+        <h3 id="product-authentication">Product authentication</h3>
+        <p>A code may connect to a brand-controlled verification service, especially when combined with serialization, tamper evidence, digital signatures, or anti-copying features.</p>
+        <hr />
+        <h2 id="18-digital-product-passports-and-regulation-driven-identity">18. Digital Product Passports and regulation-driven identity</h2>
+        <p>The future of barcodes is also being shaped by regulation. The European Union's Ecodesign for Sustainable Products Regulation establishes a framework for product sustainability requirements and explicitly establishes a digital product passport. The regulation requires that a digital product passport be connected through a data carrier to a persistent unique product identifier, and that the data carrier be physically present on the product, packaging, or accompanying documentation as specified by delegated acts.<sup><a href="#fn-eu-espr" id="fnref-eu-espr-1" aria-label="Source note eu-espr">[eu-espr]</a></sup></p>
+        <p>Batteries are the first major DPP product group. The European Commission states that the battery passport will be linked to a battery through a QR code and may include battery identification, technical characteristics, manufacturer information, performance and durability data, repair/reuse/recycling information, and sustainability data.<sup><a href="#fn-eu-battery-passport" id="fnref-eu-battery-passport-1" aria-label="Source note eu-battery-passport">[eu-battery-passport]</a></sup> The Commission's current battery-passport timeline lists the DPP Registry becoming operational on July 20, 2026, and the battery passport becoming mandatory for relevant battery categories placed on the EU market on February 18, 2027.<sup><a href="#fn-eu-battery-passport" id="fnref-eu-battery-passport-2" aria-label="Source note eu-battery-passport">[eu-battery-passport]</a></sup></p>
+        <p>This is broader than grocery checkout. It shows that the physical-to-digital identity pattern is becoming part of product regulation, sustainability, and circular economy infrastructure.</p>
+        <hr />
+        <h2 id="19-the-technical-stack-of-the-future-barcode-ecosystem">19. The technical stack of the future barcode ecosystem</h2>
+        <p>The future of barcode technology is best understood as a stack:</p>
+        <pre><code>Physical object
+    ↓
+Data carrier
+    QR Code / Data Matrix / NFC / RFID / watermark / other carrier
+    ↓
+Identifier
+    GTIN / serial / lot / product passport ID / asset ID
+    ↓
+Structured data syntax
+    GS1 Application Identifiers / GS1 Digital Link URI / EPC
+    ↓
+Resolver or application
+    Web resolver / POS / warehouse system / healthcare system / regulator portal
+    ↓
+Data and services
+    Product information / recall status / authentication / instructions / sustainability / analytics</code></pre>
+        <p>The barcode is only one layer. The future value is in the connection among layers.</p>
+        <p>This also means that different technologies will coexist:</p>
+        <ul>
+        <li><strong>UPC/EAN</strong> will remain the long-tail retail identifier carrier.</li>
+        <li><strong>QR Code</strong> will be important where smartphone access and web links matter.</li>
+        <li><strong>GS1 DataMatrix</strong> will remain strong in healthcare, regulated products, and compact operational marking.</li>
+        <li><strong>RFID and EPC</strong> will continue to serve high-volume non-line-of-sight inventory applications.</li>
+        <li><strong>NFC</strong> will serve consumer interaction, authentication, and durable URL-like identity experiences.</li>
+        <li><strong>Digital watermarks</strong> may complement visible codes where packaging design or scanability constraints matter.</li>
+        </ul>
+        <p>The market will not converge on one physical carrier for every use case. It will converge on interoperable identity and data semantics.</p>
+        <hr />
+        <h2 id="20-security-trust-and-privacy">20. Security, trust, and privacy</h2>
+        <p>As barcodes become web links, they inherit web risks.</p>
+        <p>A UPC printed on a can of soup was hard to weaponize in the same way as a URL. A QR code can send a user to a malicious site if the code is replaced, covered, or generated by an untrusted party. Counterfeiters can copy visible codes. Attackers can place stickers over legitimate codes. Vendors can use scans to collect behavioral data. Brands can lose control of domains. Redirect services can disappear.</p>
+        <p>DENSO's QR Code future materials include concepts for counterfeit prevention, tamper detection, and authentication, including scanning a product QR Code to verify whether the product was sold through an authorized channel.<sup><a href="#fn-denso-qr-30" id="fnref-denso-qr-30-4" aria-label="Source note denso-qr-30">[denso-qr-30]</a></sup></p>
+        <p>The industry will need stronger patterns:</p>
+        <ul>
+        <li>trusted domains;</li>
+        <li>HTTPS everywhere;</li>
+        <li>resolver governance;</li>
+        <li>signed product claims;</li>
+        <li>tamper-evident packaging;</li>
+        <li>privacy-preserving analytics;</li>
+        <li>long-term URL stewardship;</li>
+        <li>scanner UI that shows destination clearly;</li>
+        <li>anti-substitution controls;</li>
+        <li>consumer education.</li>
+        </ul>
+        <p>The next barcode era is therefore also a trust architecture problem.</p>
+        <hr />
+        <h2 id="21-what-remains-from-the-upc-era">21. What remains from the UPC era</h2>
+        <p>The UPC will not simply vanish because it still does some things extremely well:</p>
+        <ul>
+        <li>it is cheap to print;</li>
+        <li>it is globally understood;</li>
+        <li>scanners know how to read it;</li>
+        <li>databases are built around it;</li>
+        <li>packaging lines are optimized for it;</li>
+        <li>it has decades of operational reliability;</li>
+        <li>it is sufficient for many simple checkout use cases.</li>
+        </ul>
+        <p>But the UPC is no longer sufficient as the only carrier for the product-data needs now emerging.</p>
+        <p>The future keeps the UPC's central lesson: standards matter more than graphics. A beautiful QR Code is useless at retail if POS systems cannot parse it. A Data Matrix containing lot and expiration is useless if downstream systems treat it as plain text. A Digital Link URI is fragile if the domain and resolver are not governed over time.</p>
+        <p>The classic UPC solved the first-order problem of identifying products. The next generation solves a broader problem: connecting physical products to structured, dynamic, interoperable digital information.</p>
+        <hr />
+        <h2 id="22-conclusion-from-product-numbers-to-connected-product-identities">22. Conclusion: from product numbers to connected product identities</h2>
+        <p>The history of the barcode can be summarized as three eras.</p>
+        <h3 id="era-1-machine-readable-classification">Era 1: Machine-readable classification</h3>
+        <p>Woodland and Silver imagined patterns of light and dark marks that could classify articles automatically. Their patent contained the core idea, but the supporting technology was not yet ready.<sup><a href="#fn-woodland-silver-patent" id="fnref-woodland-silver-patent-2" aria-label="Source note woodland-silver-patent">[woodland-silver-patent]</a></sup></p>
+        <h3 id="era-2-standardized-retail-identity">Era 2: Standardized retail identity</h3>
+        <p>The grocery industry, IBM, UCC, EAN, scanner vendors, manufacturers, and retailers turned barcode theory into commercial infrastructure. The first scan of Wrigley's gum in 1974 became symbolic because it proved that product identity could be automated at checkout and linked to a database.<sup><a href="#fn-smithsonian-scanner" id="fnref-smithsonian-scanner-3" aria-label="Source note smithsonian-scanner">[smithsonian-scanner]</a></sup></p>
+        <h3 id="era-3-connected-physical-identity">Era 3: Connected physical identity</h3>
+        <p>The current transition moves from identifiers printed as bars to identities expressed through richer 2D symbols, web links, resolvers, application identifiers, and digital services. GS1 Digital Link, GS1 DataMatrix, QR Code, RFID, NFC, digital product passports, and regulatory traceability all point in the same direction: physical products are becoming addressable digital entities.</p>
+        <p>The barcode's future is not merely a square replacing stripes. It is the transformation of packaging from a static label into an entry point for trusted, structured, updateable product intelligence.</p>
+        <p>The UPC made commerce faster by answering, "What item is this?"</p>
+        <p>The next generation of barcodes will be judged by how well they answer, "What is this specific product, what is its current status, what can be trusted about it, and what information or services should this person or system receive right now?"</p>
+        <p>That is the real shift from lines to links.</p>
+        <hr />
+        <h1 id="appendix-a-condensed-timeline">Appendix A: Condensed timeline</h1>
+        <div class="history-table"><table><thead><tr><th>Year</th><th>Event</th></tr></thead><tbody>
+        <tr><td>1948</td><td>Bernard Silver and Norman Joseph Woodland begin work on automatic product identification after the grocery-checkout problem reaches Drexel.</td></tr>
+        <tr><td>1949</td><td>Woodland and Silver file the patent application for <em>Classifying Apparatus and Method</em>.</td></tr>
+        <tr><td>1952</td><td>U.S. Patent 2,612,994 is issued to Woodland and Silver.</td></tr>
+        <tr><td>1960s</td><td>Railroads test KarTrak Automatic Car Identification for railcars.</td></tr>
+        <tr><td>1970</td><td>U.S. grocery industry forms a committee to seek a uniform product identification code.</td></tr>
+        <tr><td>1973</td><td>UPC is selected as the grocery industry standard.</td></tr>
+        <tr><td>1974</td><td>First retail UPC scan occurs at Marsh supermarket in Troy, Ohio, on Wrigley's gum.</td></tr>
+        <tr><td>1977</td><td>EAN organization is established in Europe, compatible with UPC.</td></tr>
+        <tr><td>1980s</td><td>Barcode use expands into logistics, manufacturing, healthcare, and warehouse operations.</td></tr>
+        <tr><td>1994</td><td>DENSO WAVE develops QR Code.</td></tr>
+        <tr><td>2000</td><td>QR Code becomes ISO/IEC 18004.</td></tr>
+        <tr><td>2004</td><td>GS1 DataMatrix is approved as the first 2D barcode adopted by GS1.</td></tr>
+        <tr><td>2005</td><td>UCC and EAN merge into GS1.</td></tr>
+        <tr><td>2020</td><td>GS1 Digital Link becomes central to connecting QR codes and product identifiers to web resources.</td></tr>
+        <tr><td>2027</td><td>GS1 industry target: retail POS systems should be ready to read 2D barcodes, while UPC/EAN continues to be supported.</td></tr>
+        </tbody></table></div>
+        <hr />
+        <h1 id="appendix-b-glossary">Appendix B: Glossary</h1>
+        <p><strong>1D barcode</strong>: A barcode that encodes data primarily along one dimension, such as UPC, EAN, Code 39, or Code 128.</p>
+        <p><strong>2D barcode</strong>: A symbol that encodes data in a two-dimensional grid, such as QR Code or Data Matrix.</p>
+        <p><strong>AI (Application Identifier)</strong>: A GS1 prefix that defines the meaning and format of the data that follows, such as GTIN, lot, serial number, or expiration date.</p>
+        <p><strong>Data carrier</strong>: The physical or digital medium that carries encoded data, such as a printed UPC, QR Code, Data Matrix symbol, NFC tag, or RFID tag.</p>
+        <p><strong>Data Matrix</strong>: A compact 2D barcode widely used in industrial, healthcare, and regulated product marking.</p>
+        <p><strong>EAN</strong>: European Article Numbering system, compatible with UPC and now part of the GS1 system.</p>
+        <p><strong>GS1</strong>: The global standards organization that maintains the GS1 system of identifiers, barcode standards, and related data standards.</p>
+        <p><strong>GS1 Digital Link</strong>: A GS1 standard that expresses GS1 identifiers and related attributes as web URIs, allowing a product identity to be both machine-readable and web-addressable.</p>
+        <p><strong>GTIN</strong>: Global Trade Item Number, the GS1 identifier used to identify trade items.</p>
+        <p><strong>QR Code</strong>: A 2D barcode developed by DENSO WAVE in 1994, designed for high-speed reading and high data capacity.</p>
+        <p><strong>Resolver</strong>: A service that receives an identifier or Digital Link URI and directs the requesting application to relevant information or services.</p>
+        <p><strong>Sunrise 2027</strong>: The GS1-led industry target for retail POS systems to become capable of reading and processing 2D barcodes by the end of 2027.</p>
+        <p><strong>UPC</strong>: Universal Product Code, the standardized retail barcode used widely in North America.</p>
+        <hr />
+        <h1 id="source-notes-and-bibliography">Source notes and bibliography</h1>
+        <ol class="source-notes">
+        <li id="fn-aar-kartrak">Association of American Railroads, "The Surprising Innovations that Started With Freight Railroads." See the section "Modern barcodes come from a freight rail challenge," including the discussion of KarTrak, its 13 colored labels, wide railcar adoption, and replacement by RFID AEI tags. Accessed August 8, 2026. <a href="https://www.aar.org/the-surprising-innovations-that-started-with-freight-railroads/" target="_blank" rel="noopener">https://www.aar.org/the-surprising-innovations-that-started-with-freight-railroads/</a> <a href="#fnref-aar-kartrak-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-ibm-upc">IBM, "The UPC." IBM's history page describes the grocery industry's 1970 call for a standard symbol, George Laurer's role, the Woodland/Silver origin story, the bull's-eye issue, the linear UPC design, and the 1973 birth of the UPC. Accessed August 8, 2026. <a href="https://www.ibm.com/history/upc" target="_blank" rel="noopener">https://www.ibm.com/history/upc</a> <a href="#fnref-ibm-upc-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-woodland-silver-patent">Norman J. Woodland and Bernard Silver, "Classifying Apparatus and Method," U.S. Patent 2,612,994, filed October 20, 1949, issued October 7, 1952. The patent describes using light/dark line patterns and circular patterns for article classification. Accessed August 8, 2026. <a href="https://patents.google.com/patent/US2612994A/en" target="_blank" rel="noopener">https://patents.google.com/patent/US2612994A/en</a> <a href="#fnref-woodland-silver-patent-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-gs1-timeline">GS1, "GS1 Historical Timeline." Includes 1973 barcode creation, 1974 UCC administration and first scan, 1977 EAN establishment, 2005 UCC/EAN merger, 2020 GS1 Digital Link, 2021 ambition to read 2D barcodes at retail POS by end of 2027, and 2023/2024 barcode anniversaries. Accessed August 8, 2026. <a href="https://support.gs1.org/support/solutions/articles/43000734073-gs1-historical-timeline" target="_blank" rel="noopener">https://support.gs1.org/support/solutions/articles/43000734073-gs1-historical-timeline</a> <a href="#fnref-gs1-timeline-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-smithsonian-scanner">Smithsonian National Museum of American History, "Supermarket Scanner." The record describes the June 26, 1974 Marsh supermarket installation in Troy, Ohio; the Wrigley's gum first purchase; and the Spectra Physics/NCR scanner and computerized cash register system. Accessed August 8, 2026. <a href="https://americanhistory.si.edu/collections/object/nmah_892778" target="_blank" rel="noopener">https://americanhistory.si.edu/collections/object/nmah_892778</a> <a href="#fnref-smithsonian-scanner-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-gs1-general-specs">GS1, "GS1 General Specifications." GS1 describes this as the core standards document of the GS1 system for how GS1 barcodes and identification keys should be used. Accessed August 8, 2026. <a href="https://www.gs1.org/standards/barcodes-epcrfid-id-keys/gs1-general-specifications" target="_blank" rel="noopener">https://www.gs1.org/standards/barcodes-epcrfid-id-keys/gs1-general-specifications</a> <a href="#fnref-gs1-general-specs-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-iso-ean-upc">ISO, "ISO/IEC 15420:2025 - Information technology — Automatic identification and data capture techniques — EAN/UPC bar code symbology specification." Accessed August 8, 2026. <a href="https://www.iso.org/standard/84892.html" target="_blank" rel="noopener">https://www.iso.org/standard/84892.html</a> <a href="#fnref-iso-ean-upc-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-iso-code128">ISO, "ISO/IEC 15417:2007 - Information technology — Automatic identification and data capture techniques — Code 128 bar code symbology specification." Accessed August 8, 2026. <a href="https://www.iso.org/standard/43896.html" target="_blank" rel="noopener">https://www.iso.org/standard/43896.html</a> <a href="#fnref-iso-code128-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-iso-qr">ISO, "ISO/IEC 18004:2024 - Information technology — Automatic identification and data capture techniques — QR code bar code symbology specification." The abstract describes QR Code characteristics, encoding methods, formats, dimensions, error correction rules, decoding, production quality, and parameters. Accessed August 8, 2026. <a href="https://www.iso.org/standard/83389.html" target="_blank" rel="noopener">https://www.iso.org/standard/83389.html</a> <a href="#fnref-iso-qr-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-iso-data-matrix">ISO, "ISO/IEC 16022:2024 - Information technology — Automatic identification and data capture techniques — Data Matrix bar code symbology specification." The abstract describes Data Matrix characteristics, encoding, formats, dimensions, print quality, error correction, decoding, and user-selectable parameters. Accessed August 8, 2026. <a href="https://www.iso.org/standard/80926.html" target="_blank" rel="noopener">https://www.iso.org/standard/80926.html</a> <a href="#fnref-iso-data-matrix-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-iso-databar">ISO, "ISO/IEC 24724:2011 - Information technology — Automatic identification and data capture techniques — GS1 DataBar bar code symbology specification." Accessed August 8, 2026. <a href="https://www.iso.org/standard/51426.html" target="_blank" rel="noopener">https://www.iso.org/standard/51426.html</a> <a href="#fnref-iso-databar-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-denso-qr-dev">DENSO WAVE, "QR Code development story." Describes QR Code's 1994 development, manufacturing-site origins, Masahiro Hara's role, and the need for higher-capacity, faster-read codes in high-mix manufacturing. Accessed August 8, 2026. <a href="https://www.denso-wave.com/en/technology/vol1.html" target="_blank" rel="noopener">https://www.denso-wave.com/en/technology/vol1.html</a> <a href="#fnref-denso-qr-dev-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-denso-qr-30">DENSO WAVE, "QR Code 30th anniversary." Includes QR Code history, 1994 standardization and free use, mobile phone scanning in 2002, standardization milestones through ISO/IEC 18004, capacity of approximately 7,000 numeric characters, and future concepts including security and supply-chain uses. Accessed August 8, 2026. <a href="https://www.denso-wave.com/en/system/qr/qr30th/" target="_blank" rel="noopener">https://www.denso-wave.com/en/system/qr/qr30th/</a> <a href="#fnref-denso-qr-30-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-cdc-vaccine-2d">Centers for Disease Control and Prevention, "Vaccine Two-Dimensional (2D) Barcodes," March 25, 2026. CDC states that 2D barcodes can contain product identification, lot number, and expiration date and can improve data accuracy and completeness. Accessed August 8, 2026. <a href="https://www.cdc.gov/iis/2d-barcodes/index.html" target="_blank" rel="noopener">https://www.cdc.gov/iis/2d-barcodes/index.html</a> <a href="#fnref-cdc-vaccine-2d-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-gs1-ai">GS1, "GS1 Application Identifiers." GS1 describes AIs as prefixes used in barcodes and EPC/RFID tags to define the meaning and format of data attributes, including product data beyond GTIN such as batch/lot, serial number, best-before date, and expiration date. Accessed August 8, 2026. <a href="https://ref.gs1.org/ai/?lang=en" target="_blank" rel="noopener">https://ref.gs1.org/ai/?lang=en</a> <a href="#fnref-gs1-ai-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-gs1-dl-uri">GS1, "GS1 Digital Link Standard: URI Syntax." The standard explains that GS1 Digital Link expresses GS1 identifiers and informative data as HTTP URIs with the same precision as GS1 element-string syntax and that Digital Link URIs can be used as ordinary URLs while also serving as gateways to multiple information sources. Accessed August 8, 2026. <a href="https://ref.gs1.org/standards/digital-link/uri-syntax/" target="_blank" rel="noopener">https://ref.gs1.org/standards/digital-link/uri-syntax/</a> <a href="#fnref-gs1-dl-uri-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-gs1-resolver">GS1, "GS1-Conformant Resolver Standard." States that the input to a GS1-Conformant Resolver is a GS1 Digital Link URI. Accessed August 8, 2026. <a href="https://ref.gs1.org/standards/resolver/" target="_blank" rel="noopener">https://ref.gs1.org/standards/resolver/</a> <a href="#fnref-gs1-resolver-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-gs1-system-architecture">GS1, "GS1 System Architecture Document." Describes the Digital Link standard as specifying Web URI syntax for GS1 identifiers and a resolver/resolution capability for linking a Digital Link URI to sources of relevant information and services. Accessed August 8, 2026. <a href="https://www.gs1.org/standards/gs1-system-architecture-document/current-standard" target="_blank" rel="noopener">https://www.gs1.org/standards/gs1-system-architecture-document/current-standard</a> <a href="#fnref-gs1-system-architecture-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-gs1us-retailers">GS1 US, "GS1 Digital Link: For Retailers." Explains dual marking during transition, the 2027 sunrise date for 2D acceptance at POS, continued UPC acceptance after 2027, and use cases such as recalled/expired products, automatic discounting, returns, and B2B data sharing. Accessed August 8, 2026. <a href="https://www.gs1us.org/industries-and-insights/gs1-digital-link/for-retailers" target="_blank" rel="noopener">https://www.gs1us.org/industries-and-insights/gs1-digital-link/for-retailers</a> <a href="#fnref-gs1us-retailers-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-eu-espr">Regulation (EU) 2024/1781 of the European Parliament and of the Council, June 13, 2024. Establishes a digital product passport and requires it to be connected through a data carrier to a persistent unique product identifier, with the data carrier physically present on product, packaging, or documentation as specified. Accessed August 8, 2026. <a href="https://eur-lex.europa.eu/eli/reg/2024/1781/eng" target="_blank" rel="noopener">https://eur-lex.europa.eu/eli/reg/2024/1781/eng</a> <a href="#fnref-eu-espr-1" aria-label="Back to first reference">Back</a></li>
+        <li id="fn-eu-battery-passport">European Commission, "Digital Product Passport for Batteries (Battery Passport)." States that the battery passport will be linked to a battery through a QR code, lists likely information categories, and gives timeline items including DPP Registry operational July 20, 2026 and battery passport mandatory February 18, 2027 for relevant battery categories. Accessed August 8, 2026. <a href="https://single-market-economy.ec.europa.eu/single-market/digital-product-passport/batteries_en" target="_blank" rel="noopener">https://single-market-economy.ec.europa.eu/single-market/digital-product-passport/batteries_en</a> <a href="#fnref-eu-battery-passport-1" aria-label="Back to first reference">Back</a></li>
+        </ol>
+    </div>
+</article>

@@ -10,8 +10,8 @@ namespace Barcode.Web.Models;
 /// </summary>
 public class BarcodeViewModel
 {
-    public string BarValue { get; set; } = "controlorigins.com";
-    public string? AlternateLabel { get; set; } = "Control Origins";
+    public string BarValue { get; set; } = "makeboldsolutions.com";
+    public string? AlternateLabel { get; set; } = "Make Bold Solutions";
     public TYPE EncodedType { get; set; } = TYPE.CODE93;
     public AlignmentPositions Alignment { get; set; } = AlignmentPositions.CENTER;
     public LabelPositions LabelPosition { get; set; } = LabelPositions.BOTTOMCENTER;

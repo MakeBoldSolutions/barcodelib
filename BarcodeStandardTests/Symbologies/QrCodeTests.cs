@@ -31,7 +31,7 @@ namespace BarcodeStandardTests.Symbologies
         }
 
         [TestMethod]
-        [DataRow("https://github.com/markhazleton/barcodelib")]
+        [DataRow("https://makeboldsolutions.com/markhazleton/card/")]
         [DataRow("Hello, World!")]
         [DataRow("12345678901234567890")]
         [DataRow("A")]

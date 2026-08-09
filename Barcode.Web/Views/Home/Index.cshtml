@@ -1,132 +1,275 @@
 @model Barcode.Web.Models.LibraryShowcaseVM
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Barcode Lab";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Barnhill Barcode Library</h1>
-    <p class="lead">A pure .NET (net10.0) library for generating linear AND 2D (QR Code) barcode images from a string of data &mdash; both raster (PNG/JPEG/GIF/TIFF/BMP) and vector (SVG) output, no external imaging dependencies beyond <code>System.Drawing.Common</code>.</p>
-
-    <p>
-        <img src="/Home/MyImage" alt="Sample barcode (raster)" />
-    </p>
-
-    <p>
-        <a class="mbs-btn mbs-btn--primary mbs-btn--lg" asp-controller="BarCode" asp-action="Index">View BarCode Demo &raquo;</a>
-        <a target="_blank" class="mbs-btn mbs-btn--secondary mbs-btn--lg" href="https://www.nuget.org/packages/BarcodeLib">NuGet Package &raquo;</a>
-        <a target="_blank" class="mbs-btn mbs-btn--ghost mbs-btn--lg" href="https://github.com/markhazleton/barcodelib">Source on GitHub &raquo;</a>
-    </p>
-</div>
-
-<hr class="my-5" />
-
-<div class="row text-center g-4">
-    <div class="col-md-3">
-        <h2 class="display-6" style="color:var(--brand)">@Model.SymbologyCount</h2>
-        <p class="text-muted">supported barcode symbologies</p>
-    </div>
-    <div class="col-md-3">
-        <h2 class="display-6" style="color:var(--brand)">80</h2>
-        <p class="text-muted">unit tests, including QR round-trip decode checks</p>
-    </div>
-    <div class="col-md-3">
-        <h2 class="display-6" style="color:var(--brand)">GS1</h2>
-        <p class="text-muted">compliant quiet-zone rendering (v3.2.0+)</p>
-    </div>
-    <div class="col-md-3">
-        <h2 class="display-6" style="color:var(--brand)">SVG</h2>
-        <p class="text-muted">vector output alongside raster (v3.3.0+)</p>
-    </div>
-</div>
-
-<hr class="my-5" />
-
-<div class="row align-items-center g-4">
-    <div class="col-lg-6">
-        <h3>Raster vs. SVG output</h3>
-        <p class="text-muted">
-            <code>Barcode.EncodedImage</code> still returns a raster <code>System.Drawing.Image</code>
-            as always. The new <code>Barcode.GetSvg()</code> renders the exact same encoded data as a
-            self-contained, resolution-independent SVG document instead &mdash; both share the same
-            GS1-aware bar geometry, so they always agree pixel-for-pixel on where the bars land.
+<section class="lab-hero">
+    <div class="lab-hero__copy">
+        <div class="mbs-eyebrow mbs-eyebrow--brand">Barcode Lab</div>
+        <h1>From UPC to connected products</h1>
+        <p class="lab-hero__lead">
+            An open .NET demonstration of traditional barcodes, QR codes, digital identity,
+            product information, and the emerging GS1 2D ecosystem.
         </p>
-        <div class="row text-center">
-            <div class="col-6">
-                <p class="fw-bold mb-1">PNG (raster)</p>
-                <img src="/Home/MyImage" alt="Sample barcode rendered as PNG" class="img-fluid border" />
+        <div class="lab-hero__actions">
+            <a class="mbs-btn mbs-btn--primary mbs-btn--lg" href="#experience">Experience the transition</a>
+            <a class="mbs-btn mbs-btn--secondary mbs-btn--lg" asp-controller="BarCode" asp-action="Index">Open Classic Barcode Lab</a>
+        </div>
+    </div>
+    <div class="package-demo" aria-label="Virtual product package showing a UPC and 2D QR code">
+        <div class="package-demo__brand">ACME COFFEE</div>
+        <div class="package-demo__subtitle">Dual-marked demonstration package</div>
+        <div class="package-demo__codes">
+            <div>
+                <img src="/Home/DemoUpcSvg" alt="UPC-A barcode for demonstration product" />
+                <span>Traditional UPC</span>
             </div>
-            <div class="col-6">
-                <p class="fw-bold mb-1">SVG (vector)</p>
-                <img src="/Home/MySvg" alt="Sample barcode rendered as SVG" class="img-fluid border" />
+            <div>
+                <img src="/Home/DemoDigitalLinkQrSvg" alt="QR code containing a GS1-oriented Digital Link URI" />
+                <span>Emerging 2D</span>
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
-        <h3>Now with QR Code (2D)</h3>
-        <p class="text-muted">
-            <code>TYPE.QRCODE</code> generates a real, scannable QR symbol (try it with your phone
-            camera) using a vendored, MIT-licensed Reed-Solomon/masking encoder &mdash; still zero
-            new runtime package dependencies. Both <code>EncodedImage</code> and
-            <code>GetSvg()</code> work for QR the same way they do for linear symbologies.
+</section>
+
+<section class="identity-thesis" aria-labelledby="identity-thesis-title">
+    <h2 id="identity-thesis-title">The central abstraction is physical-to-digital identity.</h2>
+    <div class="identity-thesis__grid">
+        <div>
+            <span class="identity-thesis__label">A barcode used to answer</span>
+            <strong>What product is this?</strong>
+        </div>
+        <div>
+            <span class="identity-thesis__label">A modern 2D identity can help answer</span>
+            <strong>What is it, which lot or instance is it, and what digital resources are associated with it?</strong>
+        </div>
+    </div>
+</section>
+
+<section class="lab-nav-grid" aria-label="Barcode Lab sections">
+    <a href="#learn" class="lab-nav-card">
+        <span>Learn</span>
+        <strong>History, 1D, QR, GS1, Digital Link, Sunrise 2027</strong>
+    </a>
+    <a href="#build" class="lab-nav-card">
+        <span>Build</span>
+        <strong>Classic generator, QR workbench, profiles, products</strong>
+    </a>
+    <a href="#experience" class="lab-nav-card">
+        <span>Experience</span>
+        <strong>UPC vs 2D, recall, expiration, NFC + QR</strong>
+    </a>
+</section>
+
+<section id="learn" class="lab-section" aria-labelledby="learn-title">
+    <div class="lab-section__header">
+        <div class="mbs-eyebrow mbs-eyebrow--brand">Learn</div>
+        <h2 id="learn-title">The transition is about capability, not erasing UPC.</h2>
+        <p>
+            Sunrise 2027 is best understood as 2D-readiness at retail point of sale. UPC and
+            EAN symbols still matter during coexistence, while QR, GS1 DataMatrix, and
+            GS1 Digital Link create room for richer identity and resource discovery.
         </p>
-        <div class="row text-center">
-            <div class="col-6">
-                <p class="fw-bold mb-1">QR &mdash; PNG</p>
-                <img src="/Home/MyQr" alt="QR code linking to the GitHub repository, rendered as PNG" class="img-fluid border" />
+    </div>
+    <div class="timeline">
+        <div><span>1974</span><strong>UPC enters retail</strong></div>
+        <div><span>1990s-2000s</span><strong>1D becomes ubiquitous</strong></div>
+        <div><span>2010s</span><strong>QR becomes consumer-normal</strong></div>
+        <div><span>2027</span><strong>Industry target: 2D-capable retail POS</strong></div>
+        <div><span>2028+</span><strong>Richer product identities and services expand</strong></div>
+    </div>
+    <div class="concept-grid">
+        <article>
+            <h3>How 1D Works</h3>
+            <p>A linear symbol usually carries an identifier that points systems to product data elsewhere.</p>
+        </article>
+        <article>
+            <h3>Barcode History</h3>
+            <p>Read the full article on UPC standardization, QR, GS1 Digital Link, and the move from lines to links.</p>
+            <a class="mbs-btn mbs-btn--secondary mbs-btn--sm" asp-controller="Home" asp-action="History">Read History</a>
+        </article>
+        <article>
+            <h3>How QR Works</h3>
+            <p>A QR symbol can carry text, a URL, contact data, or structured identifiers in a compact 2D matrix.</p>
+        </article>
+        <article>
+            <h3>GS1 Digital Link</h3>
+            <p>A web URI can encode GS1 identifiers and route scanners to consumer, support, or machine-readable resources.</p>
+        </article>
+        <article>
+            <h3>Security and Trust</h3>
+            <p>Once physical objects contain URLs, domain ownership, tamper resistance, redirects, and privacy become part of barcode design.</p>
+        </article>
+    </div>
+</section>
+
+<section id="build" class="lab-section" aria-labelledby="build-title">
+    <div class="lab-section__header">
+        <div class="mbs-eyebrow mbs-eyebrow--brand">Build</div>
+        <h2 id="build-title">Keep the generator, but make it Chapter 1.</h2>
+        <p>
+            The existing BarcodeLib generator remains the first lab: @Model.SymbologyCount supported
+            symbologies, SVG output, raster downloads, and JSON import/export.
+        </p>
+    </div>
+    <div class="build-grid">
+        <article class="build-panel build-panel--featured">
+            <div>
+                <h3>Classic Barcode Lab</h3>
+                <p>Generate UPC-A, EAN-13, Code 128, QR Code, and the rest of the current BarcodeLib symbologies.</p>
+                <ul class="check-list">
+                    <li>Contains a product or data identifier</li>
+                    <li>Does not inherently contain product name, recall status, lot, expiration, or instructions</li>
+                    <li>Uses the existing .NET rendering and export pipeline</li>
+                </ul>
             </div>
-            <div class="col-6">
-                <p class="fw-bold mb-1">QR &mdash; SVG</p>
-                <img src="/Home/MyQrSvg" alt="QR code linking to the GitHub repository, rendered as SVG" class="img-fluid border" />
+            <img src="/Home/DemoUpcSvg" alt="Classic UPC-A barcode" />
+            <a class="mbs-btn mbs-btn--primary" asp-controller="BarCode" asp-action="Index">Open Generator</a>
+            <a class="mbs-btn mbs-btn--secondary" asp-controller="BarCode" asp-action="Samples">View Samples</a>
+        </article>
+        <article class="build-panel">
+            <h3>QR Workbench</h3>
+            <div class="flow-line">
+                <span>Payload</span>
+                <span>Matrix</span>
+                <span>Render</span>
+                <span>Verify</span>
             </div>
+            <p>
+                The next build step is a serious QR laboratory with payload modes, error correction,
+                quiet zone controls, SVG/PNG export, and decode verification.
+            </p>
+        </article>
+        <article class="build-panel">
+            <h3>Digital Business Card</h3>
+            <div class="profile-card-demo">
+                <div class="profile-card-demo__avatar">MH</div>
+                <div>
+                    <strong>Mark Hazleton</strong>
+                    <span>Self-hosted profile URL</span>
+                </div>
+                <img src="/Home/DemoProfileQrSvg" alt="QR code linking to a self-hosted person profile" />
+            </div>
+            <p>QR and NFC should resolve to the same profile URI that the person controls.</p>
+        </article>
+        <article class="build-panel">
+            <h3>Product Registry</h3>
+            <p>Demo products can connect a GTIN, brand, ingredients, allergens, resources, and lots to one durable identity.</p>
+            <code>Product -> Identity -> Resources -> Lots</code>
+        </article>
+    </div>
+</section>
+
+<section id="experience" class="lab-section" aria-labelledby="experience-title">
+    <div class="lab-section__header">
+        <div class="mbs-eyebrow mbs-eyebrow--brand">Experience</div>
+        <h2 id="experience-title">Scan the same product two ways.</h2>
+        <p>
+            This simulator shows why the barcode is not the database. A carrier can identify
+            something, then a resolver or product registry can return different resources over time.
+        </p>
+    </div>
+
+    <div class="experience-grid">
+        <article class="scanner-panel">
+            <div class="scanner-panel__package">
+                <strong>ACME DARK ROAST</strong>
+                <div class="scanner-panel__codes">
+                    <button type="button" class="scan-trigger is-active" data-scan="upc">
+                        <img src="/Home/DemoUpcSvg" alt="UPC-A barcode for Acme Coffee" />
+                        <span>Scan UPC</span>
+                    </button>
+                    <button type="button" class="scan-trigger" data-scan="twod">
+                        <img src="/Home/DemoDigitalLinkQrSvg" alt="2D QR code for Acme Coffee lot 2027-C" />
+                        <span>Scan 2D</span>
+                    </button>
+                </div>
+            </div>
+            <div class="scan-result" id="scan-result" aria-live="polite">
+                <span class="result-label">GTIN</span>
+                <strong>012345678905</strong>
+                <p>Database lookup: Acme Dark Roast Coffee, $12.99.</p>
+            </div>
+        </article>
+
+        <article class="scanner-panel">
+            <h3>Recall Simulation</h3>
+            <p>The printed identifier does not change. The information behind the identity changes.</p>
+            <div class="lot-list">
+                <span>Lot 2027-A <strong>Active</strong></span>
+                <span>Lot 2027-B <strong>Active</strong></span>
+                <span id="recall-lot">Lot 2027-C <strong>Active</strong></span>
+            </div>
+            <button type="button" class="mbs-btn mbs-btn--primary" id="simulate-recall">Simulate Recall</button>
+            <div class="notice-card" id="recall-result" aria-live="polite">
+                Lot 2027-C is currently active in this demonstration registry.
+            </div>
+        </article>
+
+        <article class="scanner-panel">
+            <h3>Expiration Demo</h3>
+            <div class="segmented-control" role="group" aria-label="Choose a product lot">
+                <button type="button" class="expiry-trigger is-active" data-expiry="sale">Lot A</button>
+                <button type="button" class="expiry-trigger" data-expiry="markdown">Lot B</button>
+                <button type="button" class="expiry-trigger" data-expiry="expired">Lot C</button>
+            </div>
+            <div class="notice-card notice-card--ok" id="expiry-result" aria-live="polite">
+                Expires 2028. Status: Sale.
+            </div>
+        </article>
+
+        <article class="scanner-panel">
+            <h3>Code Inspector</h3>
+            <label for="inspector-input" class="form-label">Paste a code payload</label>
+            <textarea id="inspector-input" class="form-control mbs-input" rows="4">https://makeboldsolutions.com/01/00012345678905/10/2027-C</textarea>
+            <div class="inspector-output" id="inspector-output" aria-live="polite"></div>
+        </article>
+    </div>
+</section>
+
+<section class="lab-section" aria-labelledby="readiness-title">
+    <div class="lab-section__header">
+        <div class="mbs-eyebrow mbs-eyebrow--brand">Roadmap</div>
+        <h2 id="readiness-title">2D readiness checklist</h2>
+        <p>This lab is educational. It is not a GS1 certification tool.</p>
+    </div>
+    <div class="readiness-grid">
+        <div>
+            <h3>Scanning</h3>
+            <label><input type="checkbox" /> Camera or imager scanner support</label>
+            <label><input type="checkbox" /> QR and Data Matrix decoding</label>
+            <label><input type="checkbox" /> GS1 parsing</label>
+        </div>
+        <div>
+            <h3>POS</h3>
+            <label><input type="checkbox" /> Extract GTIN</label>
+            <label><input type="checkbox" /> Handle 1D + 2D coexistence</label>
+            <label><input type="checkbox" /> Prevent duplicate reads</label>
+        </div>
+        <div>
+            <h3>Data</h3>
+            <label><input type="checkbox" /> GTIN, lot, expiration, serial</label>
+            <label><input type="checkbox" /> Persistent HTTPS URLs</label>
+            <label><input type="checkbox" /> Product information resources</label>
+        </div>
+        <div>
+            <h3>Testing</h3>
+            <label><input type="checkbox" /> Print quality</label>
+            <label><input type="checkbox" /> Decode validation</label>
+            <label><input type="checkbox" /> Mobile and POS testing</label>
         </div>
     </div>
-</div>
+</section>
 
-<hr class="my-5" />
-
-<div class="row">
-    <div class="col-12">
-        <h3>What's new</h3>
-        <ul>
-            <li>
-                <strong>3.4.0:</strong> Added <strong>QR Code</strong> support
-                (<code>TYPE.QRCODE</code>) &mdash; both raster and SVG output, backed by a vendored
-                MIT-licensed encoder (ported from Project Nayuki's QR Code generator library), with
-                round-trip decode verification against an independent decoder in the test suite.
-                Access the raw module grid via the new <code>EncodedMatrix</code> property.
-            </li>
-            <li>
-                <strong>3.3.0:</strong> New <code>Barcode.GetSvg()</code> method renders any encoded
-                barcode &mdash; including standardized UPC-A/EAN-13 digit labels, ITF-14's bearer bars,
-                and PostNet's half-height dashes &mdash; as a vector SVG document, with no new package
-                dependency.
-            </li>
-            <li>
-                <strong>3.2.0:</strong> Rendered barcodes now reserve a <strong>GS1-compliant quiet
-                zone</strong> (clear margin, sized in symbol modules per the GS1 General
-                Specifications) by default. Set <code>Barcode.EnforceGS1QuietZone = false</code> to
-                opt back into the legacy (non-compliant) rendering geometry.
-            </li>
-            <li>
-                <strong>3.2.0:</strong> Expanded unit test coverage: MSI (all 4 checksum variants), the
-                Standard/Interleaved 2-of-5 family, Codabar, UPC-E, and the UPC 2/5-digit supplemental
-                add-ons all now have dedicated, hand-verified tests.
-            </li>
-        </ul>
+<section class="lab-section lab-section--compact" aria-labelledby="symbologies-title">
+    <div class="lab-section__header">
+        <h2 id="symbologies-title">Current BarcodeLib surface</h2>
+        <p>Supported symbologies are pulled from the library's <code>TYPE</code> enum.</p>
     </div>
-</div>
-
-<hr class="my-5" />
-
-<div class="row">
-    <div class="col-12">
-        <h3>Supported symbologies</h3>
-        <p class="text-muted">Pulled directly from the library's <code>TYPE</code> enum, so this list is always current with the installed package version.</p>
-        <div class="d-flex flex-wrap gap-1">
-            @foreach (var symbology in Model.Symbologies)
-            {
-                <span class="mbs-badge">@symbology</span>
-            }
-        </div>
+    <div class="d-flex flex-wrap gap-1">
+        @foreach (var symbology in Model.Symbologies)
+        {
+            <span class="mbs-badge">@symbology</span>
+        }
     </div>
-</div>
+</section>

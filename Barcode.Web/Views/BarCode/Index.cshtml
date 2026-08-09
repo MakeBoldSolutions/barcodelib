@@ -2,7 +2,7 @@
 @using System.Drawing
 @using Microsoft.AspNetCore.Routing
 @{
-    ViewData["Title"] = "BarCode Playground";
+    ViewData["Title"] = "Classic Barcode Lab";
 
     string ForeHex = "#" + Model.ForeColor.R.ToString("X2") + Model.ForeColor.G.ToString("X2") + Model.ForeColor.B.ToString("X2");
     string BackHex = "#" + Model.BackColor.R.ToString("X2") + Model.BackColor.G.ToString("X2") + Model.BackColor.B.ToString("X2");
@@ -26,9 +26,13 @@
     };
 }
 
-<div class="mbs-eyebrow mbs-eyebrow--brand">BarcodeLib</div>
-<h2>BarCode Playground</h2>
-<p class="text-muted">Generate any supported symbology directly from <code>BarcodeLib</code>, live in the browser.</p>
+<div class="mbs-eyebrow mbs-eyebrow--brand">Build / Chapter 1</div>
+<h2>Classic Barcode Lab</h2>
+<p class="text-muted">
+    Generate any supported symbology directly from <code>BarcodeLib</code>. A 1D symbol usually
+    carries an identifier; product names, lots, expiration, recall state, and web resources live in
+    systems behind that identifier.
+</p>
 
 @if (!string.IsNullOrEmpty(Model.ErrorMessage))
 {

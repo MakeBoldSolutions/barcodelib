@@ -1,0 +1,87 @@
+@model Barcode.Web.Models.BarcodeSampleViewModel
+@{
+    ViewData["Title"] = "Barcode Samples";
+}
+
+<section class="sample-hero">
+    <div>
+        <div class="mbs-eyebrow mbs-eyebrow--brand">Build / Samples</div>
+        <h1>Barcode samples for Make Bold Solutions</h1>
+        <p>
+            A generated gallery of valid barcode and QR variations for
+            <a href="@Model.TargetUrl" target="_blank" rel="noopener">@Model.TargetUrl</a>.
+            Each visible sample was encoded successfully before this page rendered.
+        </p>
+    </div>
+    <div class="sample-score">
+        <strong>@Model.ValidCount</strong>
+        <span>valid rendered samples</span>
+        <small>@Model.AttemptedCount attempted configurations</small>
+    </div>
+</section>
+
+<section class="sample-toolbar" aria-label="Sample page actions">
+    <a class="mbs-btn mbs-btn--primary" asp-controller="BarCode" asp-action="Index" asp-route-BarValue="@Model.TargetUrl" asp-route-EncodedType="QRCODE" asp-route-Width="280" asp-route-Height="280" asp-route-IncludeLabel="false">Open QR in Generator</a>
+    <a class="mbs-btn mbs-btn--secondary" asp-controller="BarCode" asp-action="Index" asp-route-BarValue="@Model.TargetUrl" asp-route-EncodedType="CODE128" asp-route-Width="560" asp-route-Height="150" asp-route-IncludeLabel="true">Open Code 128 in Generator</a>
+</section>
+
+<section class="sample-grid" aria-label="Valid barcode samples">
+    @foreach (var sample in Model.Samples)
+    {
+        var imageUrl = Url.Action(sample.RenderAction, "BarCode", sample.RouteValues);
+        <article class="sample-card">
+            <div class="sample-card__media">
+                <img src="@imageUrl" alt="@sample.Name barcode sample for @Model.TargetUrl" />
+            </div>
+            <div class="sample-card__body">
+                <div class="sample-card__header">
+                    <h2>@sample.Name</h2>
+                    <span class="mbs-badge mbs-badge--positive">Valid</span>
+                </div>
+                <p>@sample.Description</p>
+                <dl class="sample-meta">
+                    <dt>Type</dt>
+                    <dd>@sample.EncodedType</dd>
+                    <dt>Payload</dt>
+                    <dd><code>@sample.Payload</code></dd>
+                    <dt>Size</dt>
+                    <dd>@sample.Width x @sample.Height</dd>
+                    <dt>Colors</dt>
+                    <dd>
+                        <span class="swatch" style="--swatch-color:@sample.ForeColor"></span>
+                        <code>@sample.ForeColor</code>
+                        <span class="swatch" style="--swatch-color:@sample.BackColor"></span>
+                        <code>@sample.BackColor</code>
+                    </dd>
+                    <dt>Label</dt>
+                    <dd>@(sample.IncludeLabel ? sample.LabelPosition.ToString() : "None")</dd>
+                </dl>
+                <div class="sample-card__actions">
+                    <a class="mbs-btn mbs-btn--secondary mbs-btn--sm" href="@imageUrl" target="_blank" rel="noopener">Open SVG</a>
+                    <a class="mbs-btn mbs-btn--ghost mbs-btn--sm" href="@Url.Action("Index", "BarCode", sample.RouteValues)">Edit</a>
+                </div>
+            </div>
+        </article>
+    }
+</section>
+
+@if (Model.FailedSamples.Count > 0)
+{
+    <section class="sample-failures" aria-labelledby="failed-samples-title">
+        <h2 id="failed-samples-title">Unsupported configurations</h2>
+        <p>
+            These were attempted for the same URL but are not displayed as rendered samples because
+            the selected symbology or configuration rejected the payload.
+        </p>
+        <div class="sample-failure-list">
+            @foreach (var sample in Model.FailedSamples)
+            {
+                <div>
+                    <strong>@sample.Name</strong>
+                    <span>@sample.EncodedType</span>
+                    <code>@sample.ErrorMessage</code>
+                </div>
+            }
+        </div>
+    </section>
+}
