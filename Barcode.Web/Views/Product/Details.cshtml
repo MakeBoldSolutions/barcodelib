@@ -1,0 +1,138 @@
+@model Barcode.Web.Models.ProductPageViewModel
+@{
+    var product = Model.Product;
+    var selectedLot = Model.SelectedLot;
+    var digitalLinkUrl = Model.DigitalLinkUrl;
+    var priceAmount = product.Price.Replace("$", string.Empty);
+    ViewData["Title"] = product.Name;
+    ViewData["Description"] = $"{product.Name} mock product page for Barcode Lab QR Code and connected product demonstrations.";
+    ViewData["Keywords"] = $"Bold Coffee, {product.Name}, GTIN {product.Gtin}, product QR code, GS1 Digital Link";
+}
+
+@section StructuredData {
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@type": "Product",
+      "name": "@product.Name",
+      "brand": {
+        "@@type": "Brand",
+        "name": "@product.Brand"
+      },
+      "description": "@product.Description",
+      "gtin": "@product.Gtin",
+      "sku": "@product.Upc",
+      "offers": {
+        "@@type": "Offer",
+        "price": "@priceAmount",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+    </script>
+}
+
+<section class="product-hero">
+    <div class="product-package" aria-label="@product.Name package mockup">
+        <span>@product.Brand</span>
+        <strong>@product.Name</strong>
+        <small>@product.NetWeight</small>
+        <img src="@Url.Action("Svg", "BarCode", new { BarValue = digitalLinkUrl, EncodedType = BarcodeLib.TYPE.QRCODE, Width = 220, Height = 220, IncludeLabel = false })" alt="QR Code linking to this Bold Coffee product record" />
+    </div>
+    <div class="product-hero__copy">
+        <div class="mbs-eyebrow mbs-eyebrow--brand">Mock Product Page</div>
+        <h1>@product.Name</h1>
+        <p>@product.Description</p>
+        <div class="product-actions">
+            <a class="mbs-btn mbs-btn--primary" href="@digitalLinkUrl">Open QR Link</a>
+            <a class="mbs-btn mbs-btn--secondary" asp-route="barcode" asp-route-BarValue="@digitalLinkUrl" asp-route-EncodedType="QRCODE" asp-route-Width="280" asp-route-Height="280" asp-route-IncludeLabel="false">Generate QR</a>
+            <a class="mbs-btn mbs-btn--ghost" asp-route="products">All Products</a>
+        </div>
+    </div>
+</section>
+
+@if (Model.OpenedFromDigitalLink)
+{
+    <section class="digital-link-result" aria-labelledby="digital-link-result-title">
+        <div>
+            <span class="result-label">Resolved QR payload</span>
+            <h2 id="digital-link-result-title">Digital Link-style path matched this product.</h2>
+        </div>
+        <code>@Context.Request.Path</code>
+    </section>
+}
+
+<section class="product-detail-grid" aria-label="Product information">
+    <article class="product-panel product-panel--identity">
+        <h2>Identity</h2>
+        <dl>
+            <dt>Brand</dt>
+            <dd>@product.Brand</dd>
+            <dt>GTIN</dt>
+            <dd>@product.Gtin</dd>
+            <dt>UPC-A</dt>
+            <dd>@product.Upc</dd>
+            <dt>QR URL</dt>
+            <dd><code>@digitalLinkUrl</code></dd>
+            <dt>Price</dt>
+            <dd>@product.Price</dd>
+        </dl>
+        <img src="/Home/DemoUpcSvg" alt="UPC-A barcode for @product.Name" />
+    </article>
+
+    <article class="product-panel">
+        <h2>Coffee</h2>
+        <dl>
+            <dt>Roast</dt>
+            <dd>@product.Roast</dd>
+            <dt>Source</dt>
+            <dd>@product.Source</dd>
+            <dt>Origin</dt>
+            <dd>@product.Region</dd>
+            <dt>Process</dt>
+            <dd>@product.Process</dd>
+            <dt>Notes</dt>
+            <dd>@product.FlavorNotes</dd>
+            <dt>Ingredients</dt>
+            <dd>@product.Ingredients</dd>
+            <dt>Allergens</dt>
+            <dd>@product.Allergens</dd>
+        </dl>
+    </article>
+
+    <article class="product-panel">
+        <h2>Resources</h2>
+        <dl>
+            <dt>Preparation</dt>
+            <dd>@product.Brewing</dd>
+            <dt>Storage</dt>
+            <dd>Store sealed in a cool, dry place.</dd>
+            <dt>Recycling</dt>
+            <dd>@product.Recycling</dd>
+            <dt>Support</dt>
+            <dd><a href="mailto:@product.SupportEmail">@product.SupportEmail</a></dd>
+        </dl>
+    </article>
+
+    <article class="product-panel">
+        <h2>Lots</h2>
+        <div class="product-lot-list">
+            @foreach (var lot in product.Lots)
+            {
+                var isSelected = selectedLot is not null && string.Equals(selectedLot.Code, lot.Code, StringComparison.OrdinalIgnoreCase);
+                <div class="product-lot @(isSelected ? "is-selected" : "")">
+                    <div>
+                        <strong>@lot.Code</strong>
+                        <span>@lot.Message</span>
+                    </div>
+                    <dl>
+                        <dt>Status</dt>
+                        <dd>@lot.Status</dd>
+                        <dt>Best before</dt>
+                        <dd>@lot.BestBefore.ToString("yyyy-MM-dd")</dd>
+                    </dl>
+                </div>
+            }
+        </div>
+    </article>
+</section>

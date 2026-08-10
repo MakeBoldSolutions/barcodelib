@@ -108,7 +108,7 @@ public class HomeController : Controller
     public ContentResult DemoDigitalLinkQrSvg()
     {
         var qr = new BarcodeLib.Barcode { EncodedType = BarcodeLib.TYPE.QRCODE };
-        qr.Encode(BarcodeLib.TYPE.QRCODE, $"{Barcode.Web.SiteBranding.SiteUrl}/01/00012345678905/10/2027-C", 260, 260);
+        qr.Encode(BarcodeLib.TYPE.QRCODE, MockProductCatalog.BoldCoffeeDigitalLinkUrl, 260, 260);
         return Content(qr.GetSvg(), "image/svg+xml");
     }
 

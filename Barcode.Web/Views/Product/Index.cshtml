@@ -1,0 +1,75 @@
+@model Barcode.Web.Models.ProductFamilyViewModel
+@{
+    ViewData["Title"] = "Bold Coffee Product Family";
+    ViewData["Description"] = "Mock Bold Coffee product family pages for QR Code, source, lot, and GS1 Digital Link demonstrations.";
+    ViewData["Keywords"] = "Bold Coffee, product family, coffee origins, product registry, QR code, GS1 Digital Link";
+}
+
+<section class="product-family-hero">
+    <div>
+        <div class="mbs-eyebrow mbs-eyebrow--brand">Product Family</div>
+        <h1>@Model.Name</h1>
+        <p>@Model.Description</p>
+        <div class="product-family-stats" aria-label="Bold Coffee family summary">
+            <span><strong>@Model.Products.Count</strong> coffees</span>
+            <span><strong>@Model.Sources.Count</strong> sources</span>
+            <span><strong>@Model.RoastProfiles.Count</strong> roast profiles</span>
+        </div>
+    </div>
+    <div class="family-source-panel">
+        <span>Sources</span>
+        <div>
+            @foreach (var source in Model.Sources)
+            {
+                <strong>@source</strong>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="product-registry" aria-labelledby="coffee-family-title">
+    <div class="product-registry__header">
+        <div class="mbs-eyebrow mbs-eyebrow--brand">Connected Product Records</div>
+        <h2 id="coffee-family-title">Multiple coffees, one product identity pattern</h2>
+        <p>
+            Each mock coffee has its own GTIN, UPC, source metadata, lots, and QR-accessible
+            Digital Link-style URL on <strong>@SiteBranding.SiteDomain</strong>.
+        </p>
+    </div>
+
+    <div class="coffee-family-grid">
+        @foreach (var product in Model.Products)
+        {
+            var digitalLinkUrl = MockProductCatalog.CreateDigitalLinkUrl(product);
+            <article class="coffee-card">
+                <div class="coffee-card__package">
+                    <span>@product.Brand</span>
+                    <strong>@product.Name.Replace("Bold ", "")</strong>
+                    <small>@product.Source</small>
+                </div>
+                <div class="coffee-card__body">
+                    <div>
+                        <h3>@product.Name</h3>
+                        <p>@product.Description</p>
+                    </div>
+                    <dl>
+                        <dt>Source</dt>
+                        <dd>@product.Region</dd>
+                        <dt>Process</dt>
+                        <dd>@product.Process</dd>
+                        <dt>Roast</dt>
+                        <dd>@product.Roast</dd>
+                        <dt>Notes</dt>
+                        <dd>@product.FlavorNotes</dd>
+                        <dt>GTIN</dt>
+                        <dd>@product.Gtin</dd>
+                    </dl>
+                    <div class="sample-card__actions">
+                        <a class="mbs-btn mbs-btn--primary mbs-btn--sm" asp-route="product" asp-route-slug="@product.Slug">Open Product</a>
+                        <a class="mbs-btn mbs-btn--secondary mbs-btn--sm" href="@digitalLinkUrl">QR Link</a>
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+</section>

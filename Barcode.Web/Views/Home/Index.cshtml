@@ -173,8 +173,9 @@
         </article>
         <article class="build-panel">
             <h3>Product Registry</h3>
-            <p>Demo products can connect a GTIN, brand, ingredients, allergens, resources, and lots to one durable identity.</p>
+            <p>Demo coffee products connect GTINs, sources, ingredients, resources, and lots to durable identities.</p>
             <code>Product -> Identity -> Resources -> Lots</code>
+            <a class="mbs-btn mbs-btn--secondary" asp-route="productfamily">Open Coffee Family</a>
         </article>
     </div>
 </section>
@@ -240,7 +241,7 @@
         <article class="scanner-panel">
             <h3>Code Inspector</h3>
             <label for="inspector-input" class="form-label">Paste a code payload</label>
-            <textarea id="inspector-input" class="form-control mbs-input" rows="4">@SiteBranding.SiteUrl/01/00012345678905/10/2027-C</textarea>
+            <textarea id="inspector-input" class="form-control mbs-input" rows="4">@MockProductCatalog.BoldCoffeeDigitalLinkUrl</textarea>
             <div class="inspector-output" id="inspector-output" aria-live="polite"></div>
         </article>
     </div>

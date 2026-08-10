@@ -27,7 +27,7 @@ public class BarCodeController : Controller
     [HttpGet]
     public IActionResult Samples()
     {
-        const string targetUrl = Barcode.Web.SiteBranding.SiteUrl;
+        var targetUrl = MockProductCatalog.BoldCoffeeDigitalLinkUrl;
         var model = new BarcodeSampleViewModel { TargetUrl = targetUrl };
 
         foreach (var sample in BuildSampleCandidates(targetUrl))

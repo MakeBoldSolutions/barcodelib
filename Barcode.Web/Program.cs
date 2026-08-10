@@ -36,6 +36,26 @@ app.MapControllerRoute(
     pattern: "privacy",
     defaults: new { controller = "Home", action = "Privacy" });
 app.MapControllerRoute(
+    name: "products",
+    pattern: "products",
+    defaults: new { controller = "Product", action = "Index" });
+app.MapControllerRoute(
+    name: "productfamily",
+    pattern: "products/bold-coffee",
+    defaults: new { controller = "Product", action = "Family" });
+app.MapControllerRoute(
+    name: "product",
+    pattern: "products/{slug}",
+    defaults: new { controller = "Product", action = "Details" });
+app.MapControllerRoute(
+    name: "gs1productlot",
+    pattern: "01/{gtin}/10/{lot}",
+    defaults: new { controller = "Product", action = "DigitalLink" });
+app.MapControllerRoute(
+    name: "gs1product",
+    pattern: "01/{gtin}",
+    defaults: new { controller = "Product", action = "DigitalLink" });
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.Run();
